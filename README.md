@@ -1,1 +1,116 @@
-# asteroid-watch
+# Asteroid Watch
+
+<br>
+
+## App Overview
+
+Asteroid Watch: A React TypeScript application that allows users to track and filter near-Earth asteroids. The app uses the <strong>NASA NeoWs API</strong> to fetch asteroid data and provides a user-friendly interface to display and filter this information.
+
+-   **Date Range Selection:** Users can select a start and end date to view asteroids that approached Earth within the selected timeframe.
+-   **Asteroid Filtering:** Users can filter asteroids by size, speed, and hazardous status.
+-   **Display Area:** Asteroids are displayed in cards showing their image, name, and other details, with content navigation to display 20(?) asteroid cards per page.
+
+<br>
+
+## Usage
+
+1. Clone this repository
+2. Make sure you're in the correct directory < asteroid-watch >
+3. Run the command 'npm install' to install node packages.
+4. Run the command 'npm run dev' to start the development server on your local browser.
+
+<br>
+
+```bash
+
+git clone <repository-url>
+
+cd asteroid-watch
+
+npm install
+
+npm run dev
+
+```
+
+<br>
+
+## Pseudocode
+
+### 1. Initial Setup
+- Setup a new TypeScript React project using Vite
+- Install necessary packages (npm install)
+
+
+NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth, will be used. When fetching data, the results will be filtered to only include those asteroids.
+
+<br>
+
+### 2. Basic Structure
+<br>
+
+**Top Bar:**
+
+-   Date Range Selection
+
+    -   Input fields for start date and end date
+    -   Fetch asteroids from the NASA NeoWs API based on the selected dates:
+        -   API URL: `https://api.nasa.gov/neo/rest/v1/feed?start_date=${startDate}&end_date=${endDate}&api_key=${apiKey}`
+    -   Filter data to include only asteroids with 'orbiting_body = "Earth"'
+    -   Store filtered data in state
+
+-   Search Button
+    -   Trigger the data fetch and filtering
+
+<br>
+
+**Side Bar:**
+
+-   Filters:
+    -   Filter by Size of Asteroid
+        -   Range slider (?) for min and max size
+    -   Filter by Speed of Asteroid
+        -   Range slider (?) for min and max speed
+    -   Filter by Hazardous Status (Boolean)
+        -   Toggle for "Hazardous" or "Not Hazardous"
+
+<br>
+
+**Display Area:**
+
+-   Display each asteroid in a card with the following info:
+
+    -   Image
+    -   Name
+    -   Size
+    -   Speed
+    -   Hazardous Status (Boolean)
+    -   Miss Distance (from Earth)
+
+-   Implement navigation to display a max of 20(?) cards per page.
+    -   Navigation controls (Next/Previous buttons)
+    -   Display current page number and total pages
+
+<br>
+
+### 3. UI/UX Design
+<br>
+
+- Style the app using SCSS for modular and reusable components.
+- Design a clean and intuitive interface:
+    - **TopBar** for date range selection and search.
+    - **Sidebar** for applying filters.
+    - **AsteroidCard** for displaying asteroid details.
+    - **AsteroidList** for display of asteroid cards.
+    - Navigation controls for moving between pages if results > 20 cards.
+
+<br>
+
+## Acknowledgments
+
+-   **NASA NeoWs API**
+
+    -   The data for this application is provided by the [NASA NeoWs API](https://api.nasa.gov/neo/rest/v1/feed). The API provides information about near-Earth objects and their trajectories.
+
+-   **Image Attribution**
+    -   <a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by Freepik - Flaticon</a>

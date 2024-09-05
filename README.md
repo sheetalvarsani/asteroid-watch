@@ -113,4 +113,4 @@ NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth,
     -   The data for this application is provided by the [NASA NeoWs API](https://api.nasa.gov/neo/rest/v1/feed). The API provides information about near-Earth objects and their trajectories.
 
 -   **Image Attribution**
-    -   <a href="url" title="asteroid-icon">Example</a><br>
+    -   <a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by Freepik - Flaticon</a>

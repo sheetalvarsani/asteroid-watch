@@ -1,0 +1,11 @@
+@use "../../styles/variables" as *;
+
+.display-area{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-light;
+    width: 100%;
+    overflow: hidden;
+}

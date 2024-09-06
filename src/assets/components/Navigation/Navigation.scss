@@ -12,10 +12,10 @@
     
     &__arrow {
     height: 1.5rem;
-    appearance: none;
     border: none;
     margin: 0 1rem;
     padding: 0;
+    background: none; 
 
     & > * {
       height: 100%;

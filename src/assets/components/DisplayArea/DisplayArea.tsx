@@ -1,3 +1,4 @@
+import './DisplayArea.scss';
 import { useState, useEffect } from "react";
 import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
@@ -52,7 +53,7 @@ function DisplayArea() {
     if (error) return <p>Error: {error}</p>;
 
     return (
-        <div>
+        <div className="display-area">
             <AsteroidList asteroids={currentAsteroids} />
             <Navigation
                 totalItems={totalItems}

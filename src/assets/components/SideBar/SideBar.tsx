@@ -1,7 +1,9 @@
+import './SideBar.scss';
+
 function SideBar() {
     return (
-        <div>
-            
+        <div className="side-bar">
+            <p>SideBar</p>
         </div>
     );
   }

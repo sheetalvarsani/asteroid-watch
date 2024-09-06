@@ -1,0 +1,26 @@
+@use "../../styles/variables" as *;
+
+.navigation{
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem auto;
+
+    &__page-info {
+        margin: 0 1rem;
+        padding: 0 1rem;
+    }
+    
+    &__arrow {
+    height: 1.5rem;
+    appearance: none;
+    border: none;
+    margin: 0 1rem;
+    padding: 0;
+
+    & > * {
+      height: 100%;
+    }
+
+  }
+
+}

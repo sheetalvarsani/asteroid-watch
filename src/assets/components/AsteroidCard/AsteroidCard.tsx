@@ -1,3 +1,5 @@
+import './AsteroidCard.scss';
+
 type Asteroid = {
     id: string;
     name: string;
@@ -26,10 +28,10 @@ type Asteroid = {
     const maxSpeed = asteroid.close_approach_data?.[0]?.relative_velocity?.kilometers_per_second
     ? parseFloat(asteroid.close_approach_data[0].relative_velocity.kilometers_per_second): 0; // get speed of Asteroid to be displayed
 
-    const missDistance = parseFloat(asteroid.close_approach_data[0].miss_distance.kilometers).toFixed(2); // get miss distance of Asteroid to be displayed
+    const missDistance = parseFloat(asteroid.close_approach_data[0].miss_distance.kilometers).toFixed(0); // get miss distance of Asteroid to be displayed
 
     return (
-      <div>
+      <div className="asteroid-card">
         {/* <img src={asteroid.imageUrl} alt={asteroid.name} /> // try and find images to use? */}
         <h3>{asteroid.name}</h3>
         <p>Size: {maxSize.toFixed(2)} km</p>

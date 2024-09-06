@@ -41,12 +41,37 @@ npm run dev
 - Setup a new TypeScript React project using Vite
 - Install necessary packages (npm install)
 
+<br>
 
-NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth, will be used. When fetching data, the results will be filtered to only include those asteroids.
+> **NOTE**: For this app, only data from asteroids where the 'orbiting_body' is Earth, will be used. When fetching data, the results will be filtered to only include those asteroids.
 
 <br>
 
+---
+
 ### 2. Basic Structure
+<br>
+
+
+
+**Components**
+
+- TopBar.tsx: Header | Date range selection | Search Button
+- SideBar.tsx: Filters for size, speed, and hazardous status | Apply Filters Button
+- AsteroidCard.tsx: Displaying individual asteroid info
+- Navigation.tsx: Controls for navigating pages
+- Button.tsx: Reusable button component for 'search' and 'apply filters'
+
+**Containers**
+
+- AsteroidList.tsx: List of Asteroid Cards, handles fetching and filtering
+- Layout.tsx: Main Layout; TopBar | SideBar | Display Area
+
+
+[Link to Figma Wireframe Design](https://www.figma.com/design/MsgisR1feClQGrdds3eI9m/Asteroid-Watch)
+
+<img src="figma-wireframe.png" alt="Figma Wireframe" max-width="500px"/>
+
 <br>
 
 **Top Bar:**
@@ -72,7 +97,9 @@ NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth,
     -   Filter by Speed of Asteroid
         -   Range slider (?) for min and max speed
     -   Filter by Hazardous Status (Boolean)
-        -   Toggle for "Hazardous" or "Not Hazardous"
+    
+-   Apply Filters Button
+    - to apply user's chosen filters.
 
 <br>
 
@@ -93,6 +120,8 @@ NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth,
 
 <br>
 
+---
+
 ### 3. UI/UX Design
 <br>
 
@@ -103,6 +132,17 @@ NOTE: For this app, only data from asteroids where the 'orbiting_body' is Earth,
     - **AsteroidCard** for displaying asteroid details.
     - **AsteroidList** for display of asteroid cards.
     - Navigation controls for moving between pages if results > 20 cards.
+    - Button
+
+<br>
+
+---
+
+### 4. Testing
+<br>
+
+- Test where possible
+    - Using React Testing Library
 
 <br>
 

@@ -58,6 +58,7 @@ npm run dev
 
 - TopBar.tsx: Header | Date range selection | Search Button
 - SideBar.tsx: Filters for size, speed, and hazardous status | Apply Filters Button
+- DisplayArea.tsx: Displays asteroids and navigation
 - AsteroidCard.tsx: Displaying individual asteroid info
 - Navigation.tsx: Controls for navigating pages
 - Button.tsx: Reusable button component for 'search' and 'apply filters'

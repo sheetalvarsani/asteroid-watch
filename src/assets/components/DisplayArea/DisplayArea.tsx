@@ -6,22 +6,24 @@ import fetchAsteroids from "../../../api";
 
 const itemsPerPage = 9;
 
-function DisplayArea() {
+type DisplayAreaProps = {
+    startDate: string;
+    endDate: string;
+};
+
+function DisplayArea({ startDate, endDate }: DisplayAreaProps) {
     const [asteroids, setAsteroids] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
-
-    // date range ** change when search bar added **
-    const startDate = "2024-01-01";
-    const endDate = "2024-01-31";
-
-    useEffect(() => {
+   
         // Fetch asteroids when the component renders
-        fetchAsteroids(startDate, endDate)
-            .then((fetchedAsteroids) => {
+        const fetchAsteroidData = (startDate: string, endDate: string) => {
+            setLoading(true); // Show loading text
+            fetchAsteroids(startDate, endDate)
+              .then((fetchedAsteroids) => {
                 setAsteroids(fetchedAsteroids);
-            })
+              })
             // If there's an error, update the error state with the error message
             .catch((error: any) => {
                 setError(error.message);
@@ -30,7 +32,12 @@ function DisplayArea() {
             .finally(() => {
                 setLoading(false);
             });
-    }, []); // Empty dependency array means this runs once on component mount
+    }
+    
+// fetch asteroids when startDate / endDate changes:
+useEffect(() => {
+    fetchAsteroidData(startDate, endDate);
+}, [startDate, endDate]); 
 
     const totalItems = asteroids.length; // calculate total number of asteroids returned
 
@@ -54,6 +61,7 @@ function DisplayArea() {
 
     return (
         <div className="display-area">
+               
             <AsteroidList asteroids={currentAsteroids} />
             <Navigation
                 totalItems={totalItems}

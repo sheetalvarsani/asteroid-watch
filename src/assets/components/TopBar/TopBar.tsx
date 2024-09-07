@@ -1,11 +1,53 @@
-import './TopBar.scss';
+import "./TopBar.scss";
+import { useState } from "react";
+import Button from "../Button/button";
 
-function TopBar() {
+type TopBarProps = {
+    onSearch: (startDate: string, endDate: string) => void;
+    hasSearched: boolean; // for TopBar styling change    
+};
+
+function TopBar({ onSearch, hasSearched }: TopBarProps) {
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+
+    // Handle search button click:
+    const handleSearchClick = () => {
+        // Make sure user selects both start and end dates:
+        if (startDate && endDate) {
+            onSearch(startDate, endDate);
+        } else {
+            alert("Please select both start and end dates.");
+        }
+    };
+
     return (
-        <div className="top-bar">
-            TopBar
+        <div className={`top-bar ${hasSearched ? 'top-bar--searched' : 'top-bar--initial'}`}>
+            <div className="top-bar__heading">
+                <h1>Asteroid Watch</h1>
+            </div>
+
+            <div className="top-bar__search">
+                <label htmlFor="start-date">Start Date: </label>
+                <input
+                    type="date"
+                    id="start-date"
+                    value={startDate}
+                    onChange={(event) => setStartDate(event.target.value)}
+                />
+
+                <label htmlFor="end-date">End Date: </label>
+                <input
+                    type="date"
+                    id="end-date"
+                    value={endDate}
+                    onChange={(event) => setEndDate(event.target.value)}
+                />
+
+                <Button text="Search" onClick={handleSearchClick} />
+            </div>
         </div>
     );
-  }
-  
-  export default TopBar;
+}
+
+export default TopBar;

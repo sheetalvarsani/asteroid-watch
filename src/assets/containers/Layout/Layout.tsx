@@ -5,24 +5,24 @@ import SideBar from "../../components/SideBar/SideBar";
 import DisplayArea from "../../components/DisplayArea/DisplayArea";
 
 function Layout() {
-
-    // for displaying asteroids initially:
-    const [startDate, setStartDate] = useState("2024-01-01"); // default start date
-    const [endDate, setEndDate] = useState("2024-01-31"); // default end date
+    const [hasSearched, setHasSearched] = useState(false); 
+    const [dateRange, setDateRange] = useState<{ startDate: string; endDate: string } | null>(null);
 
         // Handle search from TopBar
-        const handleSearch = (newStartDate: string, newEndDate: string) => {
-            setStartDate(newStartDate);
-            setEndDate(newEndDate);
+        const handleSearch = (startDate: string, endDate: string) => {
+            setDateRange({ startDate, endDate }); // user input
+            setHasSearched(true); // user has clicked search
         };
 
     return (
         <div className="layout">
-            <TopBar onSearch={handleSearch} />
-            <div className="layout__content">
-                <SideBar />
-                <DisplayArea startDate={startDate} endDate={endDate} />
-            </div>
+            <TopBar onSearch={handleSearch} hasSearched={hasSearched} />
+            {hasSearched && dateRange && (
+                <div className="layout__content">
+                    <SideBar />
+                    <DisplayArea startDate={dateRange.startDate} endDate={dateRange.endDate} />
+                </div>
+            )}
         </div>
     );
 }

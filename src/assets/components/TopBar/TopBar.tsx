@@ -4,9 +4,10 @@ import Button from "../Button/button";
 
 type TopBarProps = {
     onSearch: (startDate: string, endDate: string) => void;
+    hasSearched: boolean; // for TopBar styling change    
 };
 
-function TopBar({ onSearch }: TopBarProps) {
+function TopBar({ onSearch, hasSearched }: TopBarProps) {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
@@ -21,7 +22,7 @@ function TopBar({ onSearch }: TopBarProps) {
     };
 
     return (
-        <div className="top-bar">
+        <div className={`top-bar ${hasSearched ? 'top-bar--searched' : 'top-bar--initial'}`}>
             <div className="top-bar__heading">
                 <h1>Asteroid Watch</h1>
             </div>

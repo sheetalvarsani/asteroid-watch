@@ -1,0 +1,17 @@
+@use "../../styles/variables" as *;
+
+.button {
+    background-color: $color-dblue;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin: 0 2rem;
+
+    &:hover {
+        transform: scale(0.9);
+        background-color: $color-purple;
+    }
+}

@@ -1,9 +1,20 @@
-function Button() {
+import "./Button.scss";
+
+type ButtonProps = {
+    text: string;
+    onClick: () => void;
+    className?: string;
+};
+
+const Button = ({ text, onClick, className }: ButtonProps) => {
     return (
-        <div>
-            
-        </div>
+        <button
+            className={`button ${className ? className : ""}`}
+            onClick={onClick}
+        >
+            {text}
+        </button>
     );
-  }
-  
-  export default Button;
+};
+
+export default Button;

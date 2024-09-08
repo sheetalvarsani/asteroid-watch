@@ -4,7 +4,7 @@ import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 
-const itemsPerPage = 9;
+const itemsPerPage = 6;
 
 type DisplayAreaProps = {
     startDate: string;
@@ -28,7 +28,7 @@ function DisplayArea({ startDate, endDate }: DisplayAreaProps) {
             .catch((error: any) => {
                 setError(error.message);
             })
-            // Show loading text:
+            // Show results
             .finally(() => {
                 setLoading(false);
             });
@@ -53,21 +53,25 @@ useEffect(() => {
         startIndex + itemsPerPage
     );
 
-    // Show loading message while data is being fetched
-    if (loading) return <p>Loading...</p>;
-
-    // Show error message if there's an error
-    if (error) return <p>Error: {error}</p>;
-
     return (
         <div className="display-area">
-               
-            <AsteroidList asteroids={currentAsteroids} />
-            <Navigation
-                totalItems={totalItems}
-                itemsPerPage={itemsPerPage}
-                onPageChange={handlePageChange}
-            />
+            <div className="display-area__asteroids">
+                {loading ? (
+                    <p className="display-area__loading">Loading...</p>
+                ) : error ? (
+                    <p className="display-area__error">Error: {error}</p>
+                ) : (
+                    <AsteroidList asteroids={currentAsteroids} />
+                )}
+            </div>
+
+            <div className="display-area__nav">
+                <Navigation
+                    totalItems={totalItems}
+                    itemsPerPage={itemsPerPage}
+                    onPageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 }

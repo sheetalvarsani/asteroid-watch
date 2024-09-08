@@ -1,6 +1,8 @@
 import "./TopBar.scss";
 import { useState } from "react";
 import Button from "../Button/button";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 type TopBarProps = {
     onSearch: (startDate: string, endDate: string) => void;
@@ -8,14 +10,16 @@ type TopBarProps = {
 };
 
 function TopBar({ onSearch, hasSearched }: TopBarProps) {
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
 
     // Handle search button click:
     const handleSearchClick = () => {
         // Make sure user selects both start and end dates:
         if (startDate && endDate) {
-            onSearch(startDate, endDate);
+        const formattedStartDate = startDate.toISOString().split("T")[0];
+        const formattedEndDate = endDate.toISOString().split("T")[0];
+        onSearch(formattedStartDate, formattedEndDate);
         } else {
             alert("Please select both start and end dates.");
         }
@@ -29,19 +33,20 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
 
             <div className="top-bar__search">
                 <label htmlFor="start-date">Start Date: </label>
-                <input
-                    type="date"
-                    id="start-date"
-                    value={startDate}
-                    onChange={(event) => setStartDate(event.target.value)}
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date: Date | null) => setStartDate(date)}
+                    dateFormat="dd-MM-yyyy"
+                    placeholderText="Select Date"
+                    className="top-bar__date-picker"
                 />
-
                 <label htmlFor="end-date">End Date: </label>
-                <input
-                    type="date"
-                    id="end-date"
-                    value={endDate}
-                    onChange={(event) => setEndDate(event.target.value)}
+                <DatePicker
+                    selected={endDate}
+                    onChange={(date: Date | null) => setEndDate(date)}
+                    dateFormat="dd-MM-yyyy"
+                    placeholderText="Select Date"
+                    className="top-bar__date-picker"
                 />
 
                 <Button text="Search" onClick={handleSearchClick} />

@@ -1,7 +1,11 @@
-.side-bar {
-    background-color: yellow;
+@use "../../styles/variables" as *;
 
-    width: 500px;
+.side-bar {
+    background-color: $color-yellow;
+    margin-top: 1%;
+    margin-right: 1%;
+    border-radius: 15px;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;

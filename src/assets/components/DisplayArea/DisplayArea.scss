@@ -6,6 +6,28 @@
     justify-content: center;
     align-items: center;
     background-color: $color-light;
-    width: 100%;
-    overflow: hidden;
+    height: 70vh;
+    border-radius: 15px;
+    margin-top: 1%;
+    width: 80%;
+
+    &__loading, &__error {
+        font-size: 1.4rem; 
+        color: $color-dark; 
+    }
+
+    &__asteroids {
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    &__nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
 }

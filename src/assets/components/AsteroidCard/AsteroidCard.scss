@@ -1,6 +1,7 @@
 @use "../../styles/variables" as *;
 
 .asteroid-card {
+    font-size: 0.7rem;
     border-radius: 8px;
     padding: 16px;
     margin: 8px;
@@ -10,6 +11,7 @@
 
     h3 {
         margin-top: 0;
+        font-size: 1rem;
     }
 
     p {

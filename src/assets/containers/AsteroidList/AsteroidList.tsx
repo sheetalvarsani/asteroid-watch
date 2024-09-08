@@ -1,4 +1,4 @@
-import './AsteroidList.scss';
+import "./AsteroidList.scss";
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 
 type AsteroidListProps = {
@@ -8,6 +8,12 @@ type AsteroidListProps = {
 const AsteroidList = ({ asteroids }: AsteroidListProps) => {
     return (
         <div className="asteroid-list">
+            <div className= "asteroid-list__heading">
+                <h2> Asteroids Found:</h2>
+            </div>
+            <div className="asteroid-list__results">
+
+                
             {asteroids.length === 0 ? (
                 <p>No asteroids found.</p>
             ) : (
@@ -18,6 +24,8 @@ const AsteroidList = ({ asteroids }: AsteroidListProps) => {
                     />
                 ))
             )}
+            </div>
+
         </div>
     );
 };

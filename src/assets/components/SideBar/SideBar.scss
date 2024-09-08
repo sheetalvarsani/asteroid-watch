@@ -1,5 +1,7 @@
+@use "../../styles/variables" as *;
+
 .side-bar {
-    background-color: yellow;
+    background-color: $color-yellow;
     margin-top: 1%;
     margin-right: 1%;
     border-radius: 15px;

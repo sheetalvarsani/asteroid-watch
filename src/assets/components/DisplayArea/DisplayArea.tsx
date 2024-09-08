@@ -4,7 +4,7 @@ import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 
-const itemsPerPage = 8;
+const itemsPerPage = 6;
 
 type DisplayAreaProps = {
     startDate: string;

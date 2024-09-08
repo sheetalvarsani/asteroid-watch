@@ -37,7 +37,7 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
                     selected={startDate}
                     onChange={(date: Date | null) => setStartDate(date)}
                     dateFormat="dd-MM-yyyy"
-                    placeholderText="Select Start Date"
+                    placeholderText="Select Date"
                     className="top-bar__date-picker"
                 />
                 <label htmlFor="end-date">End Date: </label>
@@ -45,7 +45,7 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
                     selected={endDate}
                     onChange={(date: Date | null) => setEndDate(date)}
                     dateFormat="dd-MM-yyyy"
-                    placeholderText="Select End Date"
+                    placeholderText="Select Date"
                     className="top-bar__date-picker"
                 />
 

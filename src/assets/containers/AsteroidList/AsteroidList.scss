@@ -1,7 +1,6 @@
 .asteroid-list {
     display: flex;
     flex-direction: column;
-
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -12,10 +11,11 @@
     }
 
     &__results {
-        display: flex;
-        flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; 
         justify-content: center;
         align-items: center;
-        gap: 1rem;
+
     }
 }

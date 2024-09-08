@@ -9,6 +9,7 @@ type Asteroid = {
       };
     };
     close_approach_data: {
+      close_approach_date: string;
       miss_distance: {
         kilometers: string;
       };
@@ -30,10 +31,13 @@ type Asteroid = {
 
     const missDistance = parseFloat(asteroid.close_approach_data[0].miss_distance.kilometers).toFixed(0); // get miss distance of Asteroid to be displayed
 
+    const closeApproachDate = asteroid.close_approach_data[0].close_approach_date;
+
     return (
       <div className="asteroid-card">
         {/* <img src={asteroid.imageUrl} alt={asteroid.name} /> // try and find images to use? */}
         <h3>{asteroid.name}</h3>
+        <p>Close Approach On: {new Date(closeApproachDate).toLocaleDateString()}</p>
         <p>Size: {maxSize.toFixed(2)} km</p>
         <p>Speed: {maxSpeed.toFixed(2)} km/s</p> 
         <p>Hazardous: {asteroid.hazardous ? 'Yes' : 'No'}</p>

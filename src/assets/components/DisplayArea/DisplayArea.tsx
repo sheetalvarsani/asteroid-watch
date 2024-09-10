@@ -1,4 +1,4 @@
-import './DisplayArea.scss';
+import "./DisplayArea.scss";
 import { useState, useEffect } from "react";
 import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
@@ -9,21 +9,22 @@ const itemsPerPage = 6;
 type DisplayAreaProps = {
     startDate: string;
     endDate: string;
+    filters: { size?: { min: number; max: number } };
 };
 
-function DisplayArea({ startDate, endDate }: DisplayAreaProps) {
+function DisplayArea({ startDate, endDate, filters }: DisplayAreaProps) {
     const [asteroids, setAsteroids] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
-   
-        // Fetch asteroids when the component renders
-        const fetchAsteroidData = (startDate: string, endDate: string) => {
-            setLoading(true); // Show loading text
-            fetchAsteroids(startDate, endDate)
-              .then((fetchedAsteroids) => {
+
+    // Fetch asteroids when the component renders
+    const fetchAsteroidData = (startDate: string, endDate: string) => {
+        setLoading(true); // Show loading text
+        fetchAsteroids(startDate, endDate)
+            .then((fetchedAsteroids) => {
                 setAsteroids(fetchedAsteroids);
-              })
+            })
             // If there's an error, update the error state with the error message
             .catch((error: any) => {
                 setError(error.message);
@@ -32,14 +33,30 @@ function DisplayArea({ startDate, endDate }: DisplayAreaProps) {
             .finally(() => {
                 setLoading(false);
             });
-    }
-    
-// fetch asteroids when startDate / endDate changes:
-useEffect(() => {
-    fetchAsteroidData(startDate, endDate);
-}, [startDate, endDate]); 
+    };
 
-    const totalItems = asteroids.length; // calculate total number of asteroids returned
+    // fetch asteroids when startDate / endDate changes:
+    useEffect(() => {
+        fetchAsteroidData(startDate, endDate);
+    }, [startDate, endDate]);
+
+    // Apply filters to asteroids
+    const [filteredAsteroids, setFilteredAsteroids] = useState<any[]>([]);
+
+    useEffect(() => {
+        // Filter asteroids based on the selected size range
+        const { size } = filters;
+        const filtered = asteroids.filter((asteroid: any) => {
+            const sizeMax = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
+            return size
+                ? size.min <= sizeMax && sizeMax <= size.max
+                : true;
+        });
+        setFilteredAsteroids(filtered);
+    }, [asteroids, filters]);
+
+
+    const totalItems = filteredAsteroids.length; // calculate total number of asteroids returned
 
     // function to handle page changes
     const handlePageChange = (pageNumber: number) => {
@@ -48,7 +65,7 @@ useEffect(() => {
 
     // calculate when to slice asteroid array to get 9 asteroids per page:
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentAsteroids = asteroids.slice(
+    const currentAsteroids = filteredAsteroids.slice(
         startIndex,
         startIndex + itemsPerPage
     );

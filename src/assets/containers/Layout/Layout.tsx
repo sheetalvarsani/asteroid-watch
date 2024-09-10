@@ -10,11 +10,17 @@ function Layout() {
         startDate: string;
         endDate: string;
     } | null>(null);
+    const [filters, setFilters] = useState<{ size?: { min: number; max: number } }>({}); // State for filters
 
     // Handle search from TopBar
     const handleSearch = (startDate: string, endDate: string) => {
         setDateRange({ startDate, endDate }); // user input
         setHasSearched(true); // user has clicked search
+    };
+
+    // Sidebar Filters:
+    const handleSizeChange = (minSize: number, maxSize: number) => {
+        setFilters({ size: { min: minSize, max: maxSize } });
     };
 
     return (
@@ -24,13 +30,14 @@ function Layout() {
             {/* Always show the sidebar after the first search, even if dateRange is null */}
             {hasSearched && (
                 <div className="layout__content">
-                    <SideBar />
+                    <SideBar minSize={0} maxSize={1000} onSizeChange={handleSizeChange} />
 
                     {/* DisplayArea only appears if there's a valid date range */}
                     {dateRange && (
                         <DisplayArea
                             startDate={dateRange.startDate}
                             endDate={dateRange.endDate}
+                            filters={filters}
                         />
                     )}
                 </div>

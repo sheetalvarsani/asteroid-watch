@@ -15,25 +15,47 @@ Asteroid Watch: A React TypeScript application that allows users to track and fi
 ## Usage
 
 1. Clone this repository
-2. Make sure you're in the correct directory < asteroid-watch >
-3. Run the command 'npm install' to install node packages.
-4. Run the command 'npm install react-datepicker' to install react-datepicker.
-4. Run the command 'npm run dev' to start the development server on your local browser.
+
+```bash
+git clone <repository-url>
+```
 
 <br>
 
+2. Make sure you're in the correct directory < asteroid-watch >
+
 ```bash
-
-git clone <repository-url>
-
 cd asteroid-watch
+```
 
+<br>
+
+
+3. Run the command 'npm install' to install node packages.
+
+```bash
 npm install
+```
 
-npm install react-datepicker
+<br>
 
+
+4. Create a .env file and add your API key (Go to the [NASA API Portal](https://api.nasa.gov/) and sign up for a free API key)
+
+```
+//.env file:
+
+VITE_NASA_API_KEY=your_nasa_api_key_here
+```
+
+
+<br>
+
+
+5. Run the command 'npm run dev' to start the development server on your local browser.
+
+```
 npm run dev
-
 ```
 
 <br>

@@ -12,19 +12,20 @@ type DisplayAreaProps = {
     filters: { size?: { min: number; max: number } };
 };
 
-function DisplayArea({ startDate, endDate, filters }: DisplayAreaProps) {
+function DisplayArea({ startDate, endDate, filters}: DisplayAreaProps) {
     const [asteroids, setAsteroids] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
+
     // Fetch asteroids when the component renders
     const fetchAsteroidData = (startDate: string, endDate: string) => {
         setLoading(true); // Show loading text
         fetchAsteroids(startDate, endDate)
-            .then((fetchedAsteroids) => {
-                setAsteroids(fetchedAsteroids);
-            })
+        .then((fetchedAsteroids) => {
+            setAsteroids(fetchedAsteroids);
+        })
             // If there's an error, update the error state with the error message
             .catch((error: any) => {
                 setError(error.message);
@@ -45,16 +46,15 @@ function DisplayArea({ startDate, endDate, filters }: DisplayAreaProps) {
 
     useEffect(() => {
         // Filter asteroids based on the selected size range
-        const { size } = filters;
-        const filtered = asteroids.filter((asteroid: any) => {
-            const sizeMax = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
-            return size
-                ? size.min <= sizeMax && sizeMax <= size.max
-                : true;
-        });
-        setFilteredAsteroids(filtered);
-    }, [asteroids, filters]);
-
+            const { size } = filters;
+            const filtered = asteroids.filter((asteroid: any) => {
+                const sizeMax = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
+                return size
+                    ? size.min <= sizeMax && sizeMax <= size.max
+                    : true;
+            });
+            setFilteredAsteroids(filtered);
+        }, [asteroids, filters]);
 
     const totalItems = filteredAsteroids.length; // calculate total number of asteroids returned
 

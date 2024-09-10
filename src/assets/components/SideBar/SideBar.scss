@@ -15,10 +15,11 @@
         flex-direction: column;
     }
 
-    // &__heading {
-    //     margin-top: 3.3rem;
-    //     margin-bottom: 0;
-    // }
+    &__heading {
+        font-size: 1.2rem;
+        margin-top: 3.3rem;
+        margin-bottom: 0;
+    }
 
     &__size-filter {
         display: flex;

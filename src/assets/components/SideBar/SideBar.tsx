@@ -88,7 +88,7 @@ const SideBar = ({
     return (
         <div className="side-bar">
             <div className="side-bar__filters">
-                {/* <h2 className="side-bar__heading">Filters:</h2> */}
+                <h2 className="side-bar__heading">FILTERS:</h2>
                 <div className="side-bar__size-filter">
                     <h3 className="side-bar__subheading">Size of Asteroid (km)</h3>
                     <label

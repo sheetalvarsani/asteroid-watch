@@ -18,27 +18,38 @@ const SideBar = ({ minSize, maxSize, onSizeChange }: SideBarProps) => {
     }, [minSize, maxSize]);
 
     // Handle changes to the slider (TWO SEPARATE SLIDERS FOR MIN AND MAX
-    const handleMinSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMinSizeChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const newMin = parseFloat(event.target.value);
         setMinRange(newMin);
         onSizeChange(newMin, maxRange);
     };
 
-    const handleMaxSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMaxSizeChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
         const newMax = parseFloat(event.target.value);
         setMaxRange(newMax);
         onSizeChange(minRange, newMax);
     };
+    // show values to 2 decimal plaaces on label of slider:
+    const formatNumber = (num: number) => num.toFixed(2);
 
     return (
         <div className="side-bar">
-            <div className="filter-section">
-                <div className="side-bar__filter">
-                    <label htmlFor="min-size-slider">
-                        Min Size (km): {minRange}
+            <div className="side-bar_filters">
+                <div className="side-bar__size-filter">
+                    <h3 className="side-bar__heading">Size of Asteroid (km)</h3>
+                    <label
+                        className="side-bar__label"
+                        htmlFor="min-size-slider"
+                    >
+                        Min Size: {formatNumber(minRange)}
                     </label>
+                    <br></br>
                     <input
-                        id="min-size-slider"
+                        className="side-bar__slider"
                         type="range"
                         min={minSize}
                         max={maxSize}
@@ -46,13 +57,17 @@ const SideBar = ({ minSize, maxSize, onSizeChange }: SideBarProps) => {
                         value={minRange}
                         onChange={handleMinSizeChange}
                     />
-                </div>
-                <div className="side-bar__filter">
-                    <label htmlFor="max-size-slider">
-                        Max Size (km): {maxRange}
+                    <br></br>
+
+                    <label
+                        className="side-bar__label"
+                        htmlFor="max-size-slider"
+                    >
+                        Max Size: {formatNumber(maxRange)}
                     </label>
+                    <br></br>
                     <input
-                        id="max-size-slider"
+                        className="side-bar__slider"
                         type="range"
                         min={minSize}
                         max={maxSize}

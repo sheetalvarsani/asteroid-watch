@@ -1,12 +1,12 @@
+import "react-datepicker/dist/react-datepicker.css";
 import "./TopBar.scss";
 import { useState } from "react";
 import Button from "../Button/button";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 type TopBarProps = {
     onSearch: (startDate: string, endDate: string) => void;
-    hasSearched: boolean; // for TopBar styling change    
+    hasSearched: boolean; // for TopBar styling change
 };
 
 function TopBar({ onSearch, hasSearched }: TopBarProps) {
@@ -17,16 +17,20 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
     const handleSearchClick = () => {
         // Make sure user selects both start and end dates:
         if (startDate && endDate) {
-        const formattedStartDate = startDate.toISOString().split("T")[0];
-        const formattedEndDate = endDate.toISOString().split("T")[0];
-        onSearch(formattedStartDate, formattedEndDate);
+            const formattedStartDate = startDate.toISOString().split("T")[0];
+            const formattedEndDate = endDate.toISOString().split("T")[0];
+            onSearch(formattedStartDate, formattedEndDate);
         } else {
             alert("Please select both start and end dates.");
         }
     };
 
     return (
-        <div className={`top-bar ${hasSearched ? 'top-bar--searched' : 'top-bar--initial'}`}>
+        <div
+            className={`top-bar ${
+                hasSearched ? "top-bar--searched" : "top-bar--initial"
+            }`}
+        >
             <div className="top-bar__heading">
                 <h1>Asteroid Watch</h1>
             </div>

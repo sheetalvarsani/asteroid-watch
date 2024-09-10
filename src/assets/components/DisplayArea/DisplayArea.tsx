@@ -10,9 +10,10 @@ type DisplayAreaProps = {
     startDate: string;
     endDate: string;
     filters: { size?: { min: number; max: number } };
+    onSizeRangeChange: (minSize: number, maxSize: number) => void; // try to show the min/max of filtered asteroids
 };
 
-function DisplayArea({ startDate, endDate, filters}: DisplayAreaProps) {
+function DisplayArea({ startDate, endDate, filters, onSizeRangeChange }: DisplayAreaProps) {
     const [asteroids, setAsteroids] = useState<any[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [error, setError] = useState<string | null>(null);
@@ -25,6 +26,14 @@ function DisplayArea({ startDate, endDate, filters}: DisplayAreaProps) {
         fetchAsteroids(startDate, endDate)
         .then((fetchedAsteroids) => {
             setAsteroids(fetchedAsteroids);
+
+            // Calculate min and max sizes
+            const sizes = fetchedAsteroids.map((asteroid: any) =>
+                asteroid.estimated_diameter.kilometers.estimated_diameter_max
+            );
+            const minSize = Math.min(...sizes);
+            const maxSize = Math.max(...sizes);
+            onSizeRangeChange(minSize, maxSize); // Update with size range
         })
             // If there's an error, update the error state with the error message
             .catch((error: any) => {
@@ -46,15 +55,13 @@ function DisplayArea({ startDate, endDate, filters}: DisplayAreaProps) {
 
     useEffect(() => {
         // Filter asteroids based on the selected size range
-            const { size } = filters;
-            const filtered = asteroids.filter((asteroid: any) => {
-                const sizeMax = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
-                return size
-                    ? size.min <= sizeMax && sizeMax <= size.max
-                    : true;
-            });
-            setFilteredAsteroids(filtered);
-        }, [asteroids, filters]);
+        const { size } = filters;
+        const filtered = asteroids.filter((asteroid: any) => {
+            const sizeMax = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
+            return size ? size.min <= sizeMax && sizeMax <= size.max : true;
+        });
+        setFilteredAsteroids(filtered);
+    }, [asteroids, filters]);
 
     const totalItems = filteredAsteroids.length; // calculate total number of asteroids returned
 

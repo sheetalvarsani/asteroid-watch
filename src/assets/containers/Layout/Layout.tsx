@@ -10,7 +10,13 @@ function Layout() {
         startDate: string;
         endDate: string;
     } | null>(null);
-    const [filters, setFilters] = useState<{ size?: { min: number; max: number } }>({}); // State for filters
+    const [filters, setFilters] = useState<{
+        size?: { min: number; max: number };
+    }>({}); // State for filters
+    const [sizeRange, setSizeRange] = useState<{ min: number; max: number }>({
+        min: 0,
+        max: 1000,
+    }); // Default size range
 
     // Handle search from TopBar
     const handleSearch = (startDate: string, endDate: string) => {
@@ -23,6 +29,11 @@ function Layout() {
         setFilters({ size: { min: minSize, max: maxSize } });
     };
 
+    //updating slider with results range:
+    const handleSizeRangeChange = (minSize: number, maxSize: number) => {
+        setSizeRange({ min: minSize, max: maxSize });
+    };
+
     return (
         <div className="layout">
             <TopBar onSearch={handleSearch} hasSearched={hasSearched} />
@@ -30,14 +41,18 @@ function Layout() {
             {/* Always show the sidebar after the first search, even if dateRange is null */}
             {hasSearched && (
                 <div className="layout__content">
-                    <SideBar minSize={0} maxSize={1000} onSizeChange={handleSizeChange} />
+                    <SideBar
+                        minSize={sizeRange.min}
+                        maxSize={sizeRange.max}
+                        onSizeChange={handleSizeChange}
+                    />
 
-                    {/* DisplayArea only appears if there's a valid date range */}
                     {dateRange && (
                         <DisplayArea
                             startDate={dateRange.startDate}
                             endDate={dateRange.endDate}
                             filters={filters}
+                            onSizeRangeChange={handleSizeRangeChange} // Pass the callback to update size range
                         />
                     )}
                 </div>

@@ -42,7 +42,7 @@ const SideBar = ({ minSize, maxSize, onSizeChange }: SideBarProps) => {
                         type="range"
                         min={minSize}
                         max={maxSize}
-                        step="1"
+                        step="0.01"
                         value={minRange}
                         onChange={handleMinSizeChange}
                     />
@@ -56,7 +56,7 @@ const SideBar = ({ minSize, maxSize, onSizeChange }: SideBarProps) => {
                         type="range"
                         min={minSize}
                         max={maxSize}
-                        step="1"
+                        step="0.01"
                         value={maxRange}
                         onChange={handleMaxSizeChange}
                     />

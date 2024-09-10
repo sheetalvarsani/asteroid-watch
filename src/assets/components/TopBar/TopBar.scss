@@ -1,6 +1,8 @@
 @use "../../styles/variables" as *;
 
 .top-bar {
+    position: relative;
+    z-index: 5;
     width: 100%;
     background-color: $color-dblue;
     height: 30vh;
@@ -43,7 +45,6 @@
         border: 2px solid black;
         width: 140px;
         background-color: $color-white;
-        
 
         &:hover {
             cursor: pointer;
@@ -67,5 +68,36 @@
         h1 {
             text-align: left;
         }
+    }
+}
+
+//----------------------------------
+// Override react-datepicker styles:
+
+.top-bar .react-datepicker {
+    background-color: $color-dblue;
+    border: 1px solid $color-dark;
+
+    .react-datepicker__header {
+        background-color: $color-white;
+    }
+
+    .react-datepicker__day--selected,
+    .react-datepicker__day--keyboard-selected {
+        background-color: $color-orange;
+        color: $color-dark;
+    }
+
+    .react-datepicker__day {
+        color: $color-white;
+    }
+
+    .react-datepicker__navigation {
+        margin: 0 1rem;
+    }
+
+    .react-datepicker__day:hover {
+        background-color: $color-yellow;
+        color: $color-dark;
     }
 }

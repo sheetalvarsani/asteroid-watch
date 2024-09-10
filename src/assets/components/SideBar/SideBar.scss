@@ -8,38 +8,51 @@
     width: 20%;
     display: flex;
     justify-content: center;
-    align-items: center;
 
    
     &__filters {
         display: flex;
         flex-direction: column;
-        gap: 20px;
     }
+
+    // &__heading {
+    //     margin-top: 3.3rem;
+    //     margin-bottom: 0;
+    // }
 
     &__size-filter {
         display: flex;
         flex-direction: column;
     }
 
-    &__heading {
+    
+    &__speed-filter {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__subheading {
         font-size: 1rem;
         color: $color-dark;
-        margin-bottom: 3rem;
+        margin: 3rem auto;
+        margin-bottom: 2rem;
     }
 
     &__label {
         font-size: 0.8rem;
+        margin-bottom: 1rem;
+    
     }
 
     &__slider {
         -webkit-appearance: none;
-        width: 100%;
-        height: 6px;
+        width: 80%;
+        height: 5px;
         border-radius: 5px;
         background: $color-white;
         opacity: 0.8;
         transition: opacity 0.1s ease-in-out;
+        margin: 0 auto;
 
         &:hover {
             opacity: 1;

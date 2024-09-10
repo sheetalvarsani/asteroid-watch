@@ -12,39 +12,57 @@ function Layout() {
     } | null>(null);
     const [filters, setFilters] = useState<{
         size?: { min: number; max: number };
-    }>({}); // State for filters
+        speed?: { min: number; max: number };
+    }>({});
     const [sizeRange, setSizeRange] = useState<{ min: number; max: number }>({
         min: 0,
         max: 1000,
-    }); // Default size range
+    });
+    const [speedRange, setSpeedRange] = useState<{ min: number; max: number }>({
+        min: 0,
+        max: 100,
+    });
 
-    // Handle search from TopBar
     const handleSearch = (startDate: string, endDate: string) => {
-        setDateRange({ startDate, endDate }); // user input
-        setHasSearched(true); // user has clicked search
+        setDateRange({ startDate, endDate });
+        setHasSearched(true);
     };
 
-    // Sidebar Filters:
     const handleSizeChange = (minSize: number, maxSize: number) => {
-        setFilters({ size: { min: minSize, max: maxSize } });
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            size: { min: minSize, max: maxSize },
+        }));
     };
 
-    //updating slider with results range:
     const handleSizeRangeChange = (minSize: number, maxSize: number) => {
         setSizeRange({ min: minSize, max: maxSize });
     };
 
+    const handleSpeedChange = (minSpeed: number, maxSpeed: number) => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            speed: { min: minSpeed, max: maxSpeed },
+        }));
+    };
+
+    const handleSpeedRangeChange = (minSpeed: number, maxSpeed: number) => {
+        setSpeedRange({ min: minSpeed, max: maxSpeed });
+    };
+    
     return (
         <div className="layout">
             <TopBar onSearch={handleSearch} hasSearched={hasSearched} />
 
-            {/* Always show the sidebar after the first search, even if dateRange is null */}
             {hasSearched && (
                 <div className="layout__content">
                     <SideBar
                         minSize={sizeRange.min}
                         maxSize={sizeRange.max}
+                        minSpeed={speedRange.min}
+                        maxSpeed={speedRange.max}
                         onSizeChange={handleSizeChange}
+                        onSpeedChange={handleSpeedChange}
                     />
 
                     {dateRange && (
@@ -52,7 +70,8 @@ function Layout() {
                             startDate={dateRange.startDate}
                             endDate={dateRange.endDate}
                             filters={filters}
-                            onSizeRangeChange={handleSizeRangeChange} // Pass the callback to update size range
+                            onSizeRangeChange={handleSizeRangeChange}
+                            onSpeedRangeChange={handleSpeedRangeChange}
                         />
                     )}
                 </div>

@@ -19,7 +19,7 @@ type Asteroid = {
             kilometers_per_second?: string;
         };
     }[];
-    hazardous: boolean;
+    is_potentially_hazardous_asteroid: boolean;
 };
 
 //----------------------------------------------------------------------
@@ -59,7 +59,7 @@ const AsteroidCard = ({ asteroid }: { asteroid: Asteroid }) => {
             </p>
             <p>Size: {maxSize.toFixed(2)} km</p>
             <p>Speed: {maxSpeed.toFixed(2)} km/s</p>
-            <p>Hazardous: {asteroid.hazardous ? "Yes" : "No"}</p>
+            <p>Hazardous: {asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}</p>
             <p>Miss Distance: {missDistance} km</p>
         </div>
     );

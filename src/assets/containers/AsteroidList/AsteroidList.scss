@@ -1,3 +1,5 @@
+@use "../../styles/variables" as *;
+
 .asteroid-list {
     display: flex;
     flex-direction: column;
@@ -6,13 +8,14 @@
     height: 100%;
 
     &__heading {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      padding: 1rem;
-      margin: 1rem auto;
-      width: 100%;
-      text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 1rem;
+        margin: 1rem auto;
+        width: 100%;
+        text-align: center;
+        color: $color-dark;
     }
 
     &__results {

@@ -19,19 +19,19 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [endDate, setEndDate] = useState<Date | null>(null);
 
-        // Handle start date changes:
-        const handleStartDateChange = (date: Date | null) => {
-            setStartDate(date);
-            // Reset endDate if it's before selected startDate
-            if (endDate && date && endDate < date) {
-                setEndDate(null);
-            }
-        };
-    
-        // Handle end date changes:
-        const handleEndDateChange = (date: Date | null) => {
-            setEndDate(date);
-        };
+    // Handle start date changes:
+    const handleStartDateChange = (date: Date | null) => {
+        setStartDate(date);
+        // Reset endDate if it's before selected startDate
+        if (endDate && date && endDate < date) {
+            setEndDate(null);
+        }
+    };
+
+    // Handle end date changes:
+    const handleEndDateChange = (date: Date | null) => {
+        setEndDate(date);
+    };
 
     // Handle search button click:
     const handleSearchClick = () => {
@@ -57,21 +57,23 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
                 <h1>Asteroid Watch</h1>
             </div>
 
+            <div className="top-bar__tagline">
+                <h3> Choose a date range to find some Asteroids:</h3>
+            </div>
+
             <div className="top-bar__search">
-                <label htmlFor="start-date">Start Date: </label>
                 <DatePicker
                     selected={startDate}
                     onChange={handleStartDateChange}
                     dateFormat="dd-MM-yyyy"
-                    placeholderText="Select Date"
+                    placeholderText="Select Start Date"
                     className="top-bar__date-picker"
                 />
-                <label htmlFor="end-date">End Date: </label>
                 <DatePicker
                     selected={endDate}
                     onChange={handleEndDateChange}
                     dateFormat="dd-MM-yyyy"
-                    placeholderText="Select Date"
+                    placeholderText="Select End Date"
                     className="top-bar__date-picker"
                     minDate={startDate || undefined} // make sure end date isn't before start date
                 />

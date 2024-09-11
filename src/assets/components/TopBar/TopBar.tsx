@@ -4,10 +4,16 @@ import { useState } from "react";
 import Button from "../Button/button";
 import DatePicker from "react-datepicker";
 
+//----------------------------------------------------------------------
+// | DATE PICKER | BUTTON |
+//----------------------------------------------------------------------
+
 type TopBarProps = {
     onSearch: (startDate: string, endDate: string) => void;
     hasSearched: boolean; // for TopBar styling change
 };
+
+//----------------------------------------------------------------------
 
 function TopBar({ onSearch, hasSearched }: TopBarProps) {
     const [startDate, setStartDate] = useState<Date | null>(null);
@@ -24,6 +30,8 @@ function TopBar({ onSearch, hasSearched }: TopBarProps) {
             alert("Please select both start and end dates.");
         }
     };
+
+    //----------------------------------------------------------------------
 
     return (
         <div

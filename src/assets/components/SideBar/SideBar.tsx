@@ -136,10 +136,10 @@ const SideBar = ({
                         <option value="speed-asc">Speed (Low to High)</option>
                         <option value="speed-desc">Speed (High to Low)</option>
                         <option value="missDistance-asc">
-                            Miss Distance (Low to High)
+                            Miss Dist. (Low to High)
                         </option>
                         <option value="missDistance-desc">
-                            Miss Distance (High to Low)
+                            Miss Dist. (High to Low)
                         </option>
                     </select>
                 </div>

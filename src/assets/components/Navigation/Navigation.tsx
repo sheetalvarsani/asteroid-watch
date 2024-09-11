@@ -1,5 +1,5 @@
 import "./Navigation.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import leftArrow from "../../../assets/images/left-arrow.png";
 import rightArrow from "../../../assets/images/right-arrow.png";
 
@@ -22,6 +22,11 @@ const Navigation = ({
 
     // to find out how many pages there'll be:
     const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // Reset the navigation on new search:
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [totalItems, itemsPerPage]);
 
     // handle page change:
     const handlePageChange = (pageNumber: number) => {

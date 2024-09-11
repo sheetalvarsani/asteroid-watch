@@ -37,6 +37,11 @@ function Layout() {
         max: 100,
     });
 
+    const [sortBy, setSortBy] = useState<{ field: string; order: string }>({
+        field: "missDistance",
+        order: "asc",
+    });
+
     //----------------------------------------------------------------------
 
     // Handle search from TOPBAR - updates date range and set search treu:
@@ -91,6 +96,14 @@ function Layout() {
 
     //----------------------------------------------------------------------
 
+    // handle sorting:
+
+    const handleSortChange = (field: string, order: string) => {
+        setSortBy({ field, order });
+    };
+
+    //----------------------------------------------------------------------
+
     return (
         <div className="layout">
             <TopBar onSearch={handleSearch} hasSearched={hasSearched} />
@@ -105,6 +118,7 @@ function Layout() {
                         onSizeChange={handleSizeChange}
                         onSpeedChange={handleSpeedChange}
                         onHazardousChange={handleHazardousChange}
+                        onSortChange={handleSortChange}
                     />
 
                     {dateRange && (
@@ -114,6 +128,7 @@ function Layout() {
                             filters={filters}
                             onSizeRangeChange={handleSizeRangeChange}
                             onSpeedRangeChange={handleSpeedRangeChange}
+                            sortBy={sortBy}
                         />
                     )}
                 </div>

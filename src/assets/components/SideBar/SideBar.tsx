@@ -11,6 +11,7 @@ type SideBarProps = {
     onSizeChange: (minSize: number, maxSize: number) => void; // Size filter
     onSpeedChange: (minSpeed: number, maxSpeed: number) => void; // Speed filter
     onHazardousChange: (hazardousOnly: boolean) => void; // Hazardous filter
+    onSortChange: (sortBy: string, sortOrder: string) => void; // sorting sidebar
 };
 
 //----------------------------------------------------------------------
@@ -23,7 +24,9 @@ const SideBar = ({
     onSizeChange,
     onSpeedChange,
     onHazardousChange,
+    onSortChange,
 }: SideBarProps) => {
+    const [view, setView] = useState<"filters" | "sort">("filters"); // Toggle between filters and sort
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
     const [minRangeSpeed, setMinRangeSpeed] = useState<number>(minSpeed);
@@ -107,6 +110,15 @@ const SideBar = ({
 
     //----------------------------------------------------------------------
 
+    // Handle sorting changes:
+
+    const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const [sortBy, sortOrder] = event.target.value.split("-");
+        onSortChange(sortBy, sortOrder);
+    };
+
+    //----------------------------------------------------------------------
+
     // show values to 2 decimal plaaces on label of slider:
     const formatNumber = (num: number) => num.toFixed(2);
 
@@ -115,7 +127,22 @@ const SideBar = ({
     return (
         <div className="side-bar">
             <div className="side-bar__filters">
-                <h2 className="side-bar__heading">FILTERS:</h2>
+                <h2 className="side-bar__heading">Filter By:</h2>
+                {/* -- SORT FILTER -- */}
+                <div className="side-bar__sort-filter">
+                    <select onChange={handleSortChange}>
+                        <option value="size-asc">Size (Low to High)</option>
+                        <option value="size-desc">Size (High to Low)</option>
+                        <option value="speed-asc">Speed (Low to High)</option>
+                        <option value="speed-desc">Speed (High to Low)</option>
+                        <option value="missDistance-asc">
+                            Miss Dist. (Low to High)
+                        </option>
+                        <option value="missDistance-desc">
+                            Miss Dist. (High to Low)
+                        </option>
+                    </select>
+                </div>
                 {/* -- SIZE FILTER -- */}
                 <div className="side-bar__size-filter">
                     <h3 className="side-bar__subheading">

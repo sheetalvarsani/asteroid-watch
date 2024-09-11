@@ -23,6 +23,8 @@ type DisplayAreaProps = {
     onSizeRangeChange: (minSize: number, maxSize: number) => void;
     // update SPEED range in LAYOUT:
     onSpeedRangeChange: (minSpeed: number, maxSpeed: number) => void;
+    // Sort state:
+    sortBy: { field: string; order: string };
 };
 
 //----------------------------------------------------------------------
@@ -33,9 +35,10 @@ function DisplayArea({
     filters,
     onSizeRangeChange,
     onSpeedRangeChange,
+    sortBy,
 }: DisplayAreaProps) {
     // Store list of asteroids:
-    const [asteroids, setAsteroids] = useState<any[]>([]);
+    const [filteredAsteroids, setFilteredAsteroids] = useState<any[]>([]);
 
     // Managing current page in navigation
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,14 +52,15 @@ function DisplayArea({
 
     //----------------------------------------------------------------------
 
-    // Fetch asteroids from API based on date range:
+    // Fetch asteroids from API based on date range, filters, and sorting
 
-    const fetchAsteroidData = (startDate: string, endDate: string) => {
-        setLoading(true); // Show loading text
-        setNoAsteroidsFound(false); // reset no asteroids found message
+    useEffect(() => {
+        setLoading(true); // Show LOADING message
+        setNoAsteroidsFound(false); // Reset no asteroids found message
+
         fetchAsteroids(startDate, endDate)
             .then((fetchedAsteroids) => {
-                setAsteroids(fetchedAsteroids);
+
                 //----------------------------------------------
                 // Calculate min and max SIZES of asteroids
                 const sizes = fetchedAsteroids.map(
@@ -67,6 +71,7 @@ function DisplayArea({
                 const minSize = Math.min(...sizes);
                 const maxSize = Math.max(...sizes);
                 onSizeRangeChange(minSize, maxSize); // Pass SIZE range to LAYOUT
+
                 //----------------------------------------------
                 // Calculate min and max SPEEDS of asteroids
                 const speeds = fetchedAsteroids.map(
@@ -80,74 +85,94 @@ function DisplayArea({
                 const maxSpeed = Math.max(...speeds);
                 onSpeedRangeChange(minSpeed, maxSpeed); // Pass SPEED range to LAYOUT
 
-                // Show no asteroids found message if no results:
-                if (fetchedAsteroids.length === 0) {
+                //----------------------------------------------
+                // Apply filters:
+                const filtered = fetchedAsteroids.filter((asteroid: any) => {
+                    const sizeMax =
+                        asteroid.estimated_diameter?.kilometers
+                            ?.estimated_diameter_max || 0;
+                    const speedValue = asteroid.close_approach_data?.[0]
+                        ?.relative_velocity?.kilometers_per_second
+                        ? parseFloat(
+                              asteroid.close_approach_data[0].relative_velocity
+                                  .kilometers_per_second
+                          )
+                        : 0;
+
+                    const isHazardous =
+                        asteroid.is_potentially_hazardous_asteroid;
+
+                    //----------------------------------------------
+                    // Filter based on size, speed, and hazardous status
+                    return (
+                        (filters.size
+                            ? filters.size.min <= sizeMax &&
+                              sizeMax <= filters.size.max
+                            : true) &&
+                        (filters.speed
+                            ? filters.speed.min <= speedValue &&
+                              speedValue <= filters.speed.max
+                            : true) &&
+                        (filters.hazardousOnly ? isHazardous === true : true)
+                    );
+                });
+
+                //----------------------------------------------
+                // SORT filtered asteroids:
+
+                const sorted = filtered.sort((a, b) => {
+                    let compareValue = 0;
+                    if (sortBy.field === "missDistance") {
+                        compareValue =
+                            parseFloat(
+                                a.close_approach_data?.[0]?.miss_distance
+                                    ?.kilometers || "0"
+                            ) -
+                            parseFloat(
+                                b.close_approach_data?.[0]?.miss_distance
+                                    ?.kilometers || "0"
+                            );
+                    } else if (sortBy.field === "size") {
+                        compareValue =
+                            (a.estimated_diameter?.kilometers
+                                ?.estimated_diameter_max || 0) -
+                            (b.estimated_diameter?.kilometers
+                                ?.estimated_diameter_max || 0);
+                    } else if (sortBy.field === "speed") {
+                        compareValue =
+                            parseFloat(
+                                a.close_approach_data?.[0]?.relative_velocity
+                                    ?.kilometers_per_second || "0"
+                            ) -
+                            parseFloat(
+                                b.close_approach_data?.[0]?.relative_velocity
+                                    ?.kilometers_per_second || "0"
+                            );
+                    }
+
+                    return sortBy.order === "asc"
+                        ? compareValue
+                        : -compareValue;
+                });
+
+                setFilteredAsteroids(sorted); // update results
+
+                //----------------------------------------------
+
+                // Show no asteroids found message if no results
+                if (sorted.length === 0) {
                     setNoAsteroidsFound(true);
+                } else {
+                    setNoAsteroidsFound(false);
                 }
             })
-            //----------------------------------------------
-            // Error / Loading
             .catch((error: any) => {
                 setError(error.message);
             })
             .finally(() => {
                 setLoading(false);
             });
-    };
-
-    //----------------------------------------------------------------------
-
-    // fetch asteroids when startDate / endDate changes:
-    useEffect(() => {
-        fetchAsteroidData(startDate, endDate);
-    }, [startDate, endDate]);
-
-    //----------------------------------------------------------------------
-
-    // Apply filters to asteroids (SIZE/SPEED)
-    const [filteredAsteroids, setFilteredAsteroids] = useState<any[]>([]);
-
-    useEffect(() => {
-        // Filter asteroids based on user's selected SIZE and SPEED range
-        const { size, speed, hazardousOnly } = filters;
-
-        const filtered = asteroids.filter((asteroid: any) => {
-            // Filter asteroids based on user's selected SIZE range
-            const sizeMax =
-                asteroid.estimated_diameter?.kilometers
-                    ?.estimated_diameter_max || 0;
-            // Filter asteroids based on the selected SPEED range
-            const speedValue = asteroid.close_approach_data?.[0]
-                ?.relative_velocity?.kilometers_per_second
-                ? parseFloat(
-                      asteroid.close_approach_data[0].relative_velocity
-                          .kilometers_per_second
-                  )
-                : 0;
-
-            // Filter by HAZARDOUS status
-            const isHazardous = asteroid.is_potentially_hazardous_asteroid;
-
-            // Make sure asteroid is within the SIZE and SPEED filters
-            return (
-                (size ? size.min <= sizeMax && sizeMax <= size.max : true) &&
-                (speed
-                    ? speed.min <= speedValue && speedValue <= speed.max
-                    : true) &&
-                (hazardousOnly ? isHazardous === true : true)
-                // apply HAZARDOUS filter
-            );
-        });
-        // Update the filtered asteroid list
-        setFilteredAsteroids(filtered);
-
-        // Show no asteroids found message if no results
-        if (filtered.length === 0) {
-            setNoAsteroidsFound(true);
-        } else {
-            setNoAsteroidsFound(false);
-        }
-    }, [asteroids, filters]);
+    }, [startDate, endDate, filters, sortBy]);
 
     //----------------------------------------------------------------------
 
@@ -190,7 +215,7 @@ function DisplayArea({
                         No Asteroids Found!
                     </h2>
                 ) : (
-                    // Asteroid list of results after filtering
+                    // Asteroid list of results after filtering/sorting
                     <AsteroidList asteroids={currentAsteroids} />
                 )}
             </div>

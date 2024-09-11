@@ -9,7 +9,6 @@
     display: flex;
     justify-content: center;
 
-   
     &__filters {
         display: flex;
         flex-direction: column;
@@ -17,8 +16,25 @@
 
     &__heading {
         font-size: 1.2rem;
-        margin-top: 3.3rem;
-        margin-bottom: 0;
+        margin-top: 3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__sort-filter {
+        select {
+            display: flex;
+            background-color: $color-white;
+            font-family: "Space Mono", monospace;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 0.5rem;
+            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            width: 90%;
+            text-align: center;
+        }
     }
 
     &__size-filter {
@@ -26,12 +42,22 @@
         flex-direction: column;
     }
 
-    
     &__speed-filter {
         display: flex;
         flex-direction: column;
     }
 
+    &__subheading {
+        font-size: 1rem;
+        color: $color-dark;
+        margin: 2.8rem auto;
+        margin-bottom: 1.7rem;
+    }
+
+    &__label {
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+    }
 
     &__slider {
         -webkit-appearance: none;
@@ -72,14 +98,14 @@
         align-items: center;
         cursor: pointer;
     }
-    
+
     /* Hide the default checkbox */
     &__checkbox input {
         position: absolute;
-        opacity: 0; 
-        pointer-events: none; 
+        opacity: 0;
+        pointer-events: none;
     }
-    
+
     &__checkbox-indicator {
         width: 20px;
         height: 20px;
@@ -92,7 +118,7 @@
         position: relative;
         transition: background-color 0.2s, border-color 0.2s;
     }
-    
+
     &__checkbox-indicator:after {
         content: "";
         position: absolute;
@@ -106,34 +132,19 @@
         opacity: 0; /* Hide tick by default */
         transition: opacity 0.2s;
     }
-    
+
     // Change checkbox styling on check:
     &__checkbox input:checked + &__checkbox-indicator {
-        background-color: $color-dblue; 
+        background-color: $color-dblue;
         border-color: $color-dark;
         opacity: 1;
     }
-    
-     // Show the tick:
-     &__checkbox input:checked + &__checkbox-indicator:after {
-        border-color: $color-white; 
+
+    // Show the tick:
+    &__checkbox input:checked + &__checkbox-indicator:after {
+        border-color: $color-white;
         opacity: 1;
-    }
-
-    &__subheading {
-        font-size: 1rem;
-        color: $color-dark;
-        margin: 3rem auto;
-        margin-bottom: 2rem;
-    }
-
-    &__label {
-        font-size: 0.8rem;
-        margin-bottom: 1rem;
-    
     }
 
 
 }
-
-

@@ -26,7 +26,6 @@ const SideBar = ({
     onHazardousChange,
     onSortChange,
 }: SideBarProps) => {
-    const [view, setView] = useState<"filters" | "sort">("filters"); // Toggle between filters and sort
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
     const [minRangeSpeed, setMinRangeSpeed] = useState<number>(minSpeed);

@@ -18,8 +18,12 @@
     &__heading {
         color: $color-dark;
         text-shadow: 2px 2px 5px $color-orange;
-        border: none;
-        margin-bottom: 1%;
+        border: none;        
+    }
+
+    &__tagline {
+        margin: 0;
+        color: $color-dark;
     }
 
     &__search {
@@ -28,17 +32,11 @@
         align-items: center;
     }
 
-    label {
-        margin-right: 0.5rem;
-        color: $color-white;
-        cursor: pointer;
-    }
-
     input {
         margin-right: 3rem;
         padding: 0.5rem;
-        padding-left: 1rem;
-        // padding-top: 0.6rem;
+        padding: 0.5rem 1rem;
+        text-align: center;
         border-radius: 8px;
         font-family: "Space Mono", monospace;
         font-weight: 600;
@@ -52,7 +50,7 @@
     }
 
     button {
-        margin-left: 2rem;
+        margin-left: 1rem;
     }
 
     &--searched {

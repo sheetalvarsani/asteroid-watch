@@ -203,7 +203,7 @@ const SideBar = ({
                             checked={hazardousOnly}
                             onChange={handleHazardousChange}
                         />
-                        Hazardous Only
+                        Hazardous
                         <span className="side-bar__checkbox-indicator"></span>
                     </label>
                 </div>

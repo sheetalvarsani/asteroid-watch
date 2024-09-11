@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
+import loadingAsteroid from "../../../assets/images/loading-asteroid.png";
 
 //----------------------------------------------------------------------
 // | ASTEROID LIST | NAVIGATION |
@@ -43,12 +44,16 @@ function DisplayArea({
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
+    // Message for no asteroids found
+    const [noAsteroidsFound, setNoAsteroidsFound] = useState(false);
+
     //----------------------------------------------------------------------
 
     // Fetch asteroids from API based on date range:
 
     const fetchAsteroidData = (startDate: string, endDate: string) => {
         setLoading(true); // Show loading text
+        setNoAsteroidsFound(false); // reset no asteroids found message
         fetchAsteroids(startDate, endDate)
             .then((fetchedAsteroids) => {
                 setAsteroids(fetchedAsteroids);
@@ -74,6 +79,11 @@ function DisplayArea({
                 const minSpeed = Math.min(...speeds);
                 const maxSpeed = Math.max(...speeds);
                 onSpeedRangeChange(minSpeed, maxSpeed); // Pass SPEED range to LAYOUT
+
+                // Show no asteroids found message if no results:
+                if (fetchedAsteroids.length === 0) {
+                    setNoAsteroidsFound(true);
+                }
             })
             //----------------------------------------------
             // Error / Loading
@@ -123,13 +133,20 @@ function DisplayArea({
                 (size ? size.min <= sizeMax && sizeMax <= size.max : true) &&
                 (speed
                     ? speed.min <= speedValue && speedValue <= speed.max
-                    : true)&&
-                    (hazardousOnly ? isHazardous === true : true) 
-                    // apply HAZARDOUS filter
+                    : true) &&
+                (hazardousOnly ? isHazardous === true : true)
+                // apply HAZARDOUS filter
             );
         });
         // Update the filtered asteroid list
         setFilteredAsteroids(filtered);
+
+        // Show no asteroids found message if no results
+        if (filtered.length === 0) {
+            setNoAsteroidsFound(true);
+        } else {
+            setNoAsteroidsFound(false);
+        }
     }, [asteroids, filters]);
 
     //----------------------------------------------------------------------
@@ -155,11 +172,23 @@ function DisplayArea({
         <div className="display-area">
             <div className="display-area__asteroids">
                 {loading ? (
-                    // LOADING message while data being fetched
-                    <p className="display-area__loading">Loading...</p>
+                    <div className="display-area__loading-container">
+                        {/* LOADING message while data being fetched */}
+                        <p className="display-area__loading">Loading</p>
+                        <img
+                            className="display-area__asteroid-image"
+                            src={loadingAsteroid}
+                            alt="Spinning Asteroid"
+                        />
+                    </div>
                 ) : error ? (
                     // ERROR message if issue
                     <p className="display-area__error">Error: {error}</p>
+                ) : noAsteroidsFound ? (
+                    // NO ASTEROIDS FOUND message
+                    <h2 className="display-area__no-asteroids">
+                        No Asteroids Found!
+                    </h2>
                 ) : (
                     // Asteroid list of results after filtering
                     <AsteroidList asteroids={currentAsteroids} />

@@ -1,6 +1,6 @@
 @use "../../styles/variables" as *;
 
-.display-area{
+.display-area {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,9 +11,26 @@
     margin-top: 1%;
     width: 80%;
 
-    &__loading, &__error {
-        font-size: 1.4rem; 
-        color: $color-dark; 
+    &__loading,
+    &__error {
+        font-size: 1.4rem;
+        color: $color-dark;
+    }
+
+    &__asteroid-image {
+        width: 20%;
+        animation: spin 5s infinite linear;
+        display: block;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
     }
 
     &__asteroids {
@@ -23,11 +40,10 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     &__nav {
         width: 100%;
         display: flex;
         justify-content: center;
     }
-
 }

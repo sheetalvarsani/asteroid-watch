@@ -10,6 +10,7 @@ type SideBarProps = {
     maxSpeed: number; // Speed Filter
     onSizeChange: (minSize: number, maxSize: number) => void; // Size filter
     onSpeedChange: (minSpeed: number, maxSpeed: number) => void; // Speed filter
+    onHazardousChange: (hazardousOnly: boolean) => void; // Hazardous filter
 };
 
 //----------------------------------------------------------------------
@@ -21,11 +22,13 @@ const SideBar = ({
     maxSpeed,
     onSizeChange,
     onSpeedChange,
+    onHazardousChange,
 }: SideBarProps) => {
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
     const [minRangeSpeed, setMinRangeSpeed] = useState<number>(minSpeed);
     const [maxRangeSpeed, setMaxRangeSpeed] = useState<number>(maxSpeed);
+    const [hazardousOnly, setHazardousOnly] = useState<boolean>(false);
 
     //----------------------------------------------------------------------
 
@@ -35,11 +38,20 @@ const SideBar = ({
         setMaxRangeSize(maxSize);
     }, [minSize, maxSize]);
 
-    // useEffect for Speed filter
+    // Update range when minSpeed or maxSpeed changes
     useEffect(() => {
         setMinRangeSpeed(minSpeed);
         setMaxRangeSpeed(maxSpeed);
     }, [minSpeed, maxSpeed]);
+
+    // Handle changes to hazardous checkbox
+    const handleHazardousChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const isChecked = event.target.checked;
+        setHazardousOnly(isChecked);
+        onHazardousChange(isChecked);
+    };
 
     //----------------------------------------------------------------------
 
@@ -84,7 +96,6 @@ const SideBar = ({
     //----------------------------------------------------------------------
 
     // show values to 2 decimal plaaces on label of slider:
-
     const formatNumber = (num: number) => num.toFixed(2);
 
     //----------------------------------------------------------------------
@@ -93,6 +104,7 @@ const SideBar = ({
         <div className="side-bar">
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">FILTERS:</h2>
+                {/* -- SIZE FILTER -- */}
                 <div className="side-bar__size-filter">
                     <h3 className="side-bar__subheading">
                         Size of Asteroid (km)
@@ -132,7 +144,7 @@ const SideBar = ({
                         onChange={handleMaxSizeChange}
                     />
                 </div>
-
+                {/* -- SPEED FILTER -- */}
                 <div className="side-bar__speed-filter">
                     <h3 className="side-bar__subheading">
                         Speed of Asteroid (km/s)
@@ -170,6 +182,17 @@ const SideBar = ({
                         value={maxRangeSpeed}
                         onChange={handleMaxSpeedChange}
                     />
+                </div>
+                {/* -- HAZARDOUS FILTER -- */}
+                <div className="side-bar__hazardous-filter">
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={hazardousOnly}
+                            onChange={handleHazardousChange}
+                        />
+                        Hazardous Only
+                    </label>
                 </div>
             </div>
         </div>

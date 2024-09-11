@@ -186,9 +186,9 @@ function DisplayArea({
                     <p className="display-area__error">Error: {error}</p>
                 ) : noAsteroidsFound ? (
                     // NO ASTEROIDS FOUND message
-                    <p className="display-area__no-asteroids">
-                        No asteroids found
-                    </p>
+                    <h2 className="display-area__no-asteroids">
+                        No Asteroids Found!
+                    </h2>
                 ) : (
                     // Asteroid list of results after filtering
                     <AsteroidList asteroids={currentAsteroids} />

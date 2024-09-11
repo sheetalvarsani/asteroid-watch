@@ -61,16 +61,22 @@ const SideBar = ({
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMinSize = parseFloat(event.target.value);
-        setMinRangeSize(newMinSize);
-        onSizeChange(newMinSize, maxRangeSize);
+        if (newMinSize <= maxRangeSize) {
+            // min slider doesn't go higher than max value
+            setMinRangeSize(newMinSize);
+            onSizeChange(newMinSize, maxRangeSize);
+        }
     };
 
     const handleMaxSizeChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMaxSize = parseFloat(event.target.value);
-        setMaxRangeSize(newMaxSize);
-        onSizeChange(minRangeSize, newMaxSize);
+        if (newMaxSize >= minRangeSize) {
+            // max slider doesn't go lowerr than min
+            setMaxRangeSize(newMaxSize);
+            onSizeChange(minRangeSize, newMaxSize);
+        }
     };
 
     //----------------------------------------------------------------------
@@ -81,16 +87,22 @@ const SideBar = ({
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMinSpeed = parseFloat(event.target.value);
-        setMinRangeSpeed(newMinSpeed);
-        onSpeedChange(newMinSpeed, maxRangeSpeed);
+        if (newMinSpeed <= maxRangeSpeed) {
+            // min slider doesn't go higher than max value
+            setMinRangeSpeed(newMinSpeed);
+            onSpeedChange(newMinSpeed, maxRangeSpeed);
+        }
     };
 
     const handleMaxSpeedChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMaxSpeed = parseFloat(event.target.value);
-        setMaxRangeSpeed(newMaxSpeed);
-        onSpeedChange(minRangeSpeed, newMaxSpeed);
+        if (newMaxSpeed >= minRangeSpeed) {
+            // max slider doesn't go lower than min value
+            setMaxRangeSpeed(newMaxSpeed);
+            onSpeedChange(minRangeSpeed, newMaxSpeed);
+        }
     };
 
     //----------------------------------------------------------------------
@@ -193,7 +205,6 @@ const SideBar = ({
                         />
                         Hazardous Only
                         <span className="side-bar__checkbox-indicator"></span>
-                        
                     </label>
                 </div>
             </div>

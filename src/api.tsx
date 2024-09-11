@@ -1,4 +1,4 @@
-const API_KEY = import.meta.env.REACT_NASA_API_KEY;
+const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
 // Fetch asteroids within a date range that are also only Earth orbiting ones::
 const fetchAsteroids = (startDate: string, endDate: string) => {

@@ -14,8 +14,9 @@ type DisplayAreaProps = {
     startDate: string;
     endDate: string;
     filters: {
-        size?: { min: number; max: number };
-        speed?: { min: number; max: number };
+        size?: { min: number; max: number }; // SIZE
+        speed?: { min: number; max: number }; // SPEED
+        hazardousOnly?: boolean; // HAZARDOUS
     };
     // update SIZE range in LAYOUT:
     onSizeRangeChange: (minSize: number, maxSize: number) => void;
@@ -98,7 +99,7 @@ function DisplayArea({
 
     useEffect(() => {
         // Filter asteroids based on user's selected SIZE and SPEED range
-        const { size, speed } = filters;
+        const { size, speed, hazardousOnly } = filters;
 
         const filtered = asteroids.filter((asteroid: any) => {
             // Filter asteroids based on user's selected SIZE range
@@ -114,12 +115,17 @@ function DisplayArea({
                   )
                 : 0;
 
-            // Make sure asteroid is within the size and speed filters
+            // Filter by HAZARDOUS status
+            const isHazardous = asteroid.is_potentially_hazardous_asteroid;
+
+            // Make sure asteroid is within the SIZE and SPEED filters
             return (
                 (size ? size.min <= sizeMax && sizeMax <= size.max : true) &&
                 (speed
                     ? speed.min <= speedValue && speedValue <= speed.max
-                    : true)
+                    : true)&&
+                    (hazardousOnly ? isHazardous === true : true) 
+                    // apply HAZARDOUS filter
             );
         });
         // Update the filtered asteroid list

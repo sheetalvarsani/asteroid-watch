@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
+import spinningAsteroid from "../../../assets/images/loading-asteroid.png";
 
 //----------------------------------------------------------------------
 // | ASTEROID LIST | NAVIGATION |
@@ -123,9 +124,9 @@ function DisplayArea({
                 (size ? size.min <= sizeMax && sizeMax <= size.max : true) &&
                 (speed
                     ? speed.min <= speedValue && speedValue <= speed.max
-                    : true)&&
-                    (hazardousOnly ? isHazardous === true : true) 
-                    // apply HAZARDOUS filter
+                    : true) &&
+                (hazardousOnly ? isHazardous === true : true)
+                // apply HAZARDOUS filter
             );
         });
         // Update the filtered asteroid list
@@ -155,8 +156,11 @@ function DisplayArea({
         <div className="display-area">
             <div className="display-area__asteroids">
                 {loading ? (
-                    // LOADING message while data being fetched
-                    <p className="display-area__loading">Loading...</p>
+                    <div className="display-area__loading-container">
+                        {/* LOADING message while data being fetched */}
+                        <p className="display-area__loading">Loading</p>
+                        <img className="display-area__asteroid-image"src={spinningAsteroid} alt="Spinning Asteroid" />
+                    </div>
                 ) : error ? (
                     // ERROR message if issue
                     <p className="display-area__error">Error: {error}</p>

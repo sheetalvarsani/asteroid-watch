@@ -137,7 +137,7 @@ const SideBar = ({
                         value={minRangeSize}
                         onChange={handleMinSizeChange}
                     />
-                    <br></br>
+                    <br />
 
                     <label
                         className="side-bar__label"
@@ -177,7 +177,7 @@ const SideBar = ({
                         value={minRangeSpeed}
                         onChange={handleMinSpeedChange}
                     />
-                    <br></br>
+                    <br />
                     <label
                         className="side-bar__label"
                         htmlFor="max-speed-slider"

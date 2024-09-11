@@ -80,24 +80,30 @@ const SideBar = ({
         setMaxRangeSpeed(newMaxSpeed);
         onSpeedChange(minRangeSpeed, newMaxSpeed);
     };
+
     //----------------------------------------------------------------------
 
     // show values to 2 decimal plaaces on label of slider:
+
     const formatNumber = (num: number) => num.toFixed(2);
+
+    //----------------------------------------------------------------------
 
     return (
         <div className="side-bar">
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">FILTERS:</h2>
                 <div className="side-bar__size-filter">
-                    <h3 className="side-bar__subheading">Size of Asteroid (km)</h3>
+                    <h3 className="side-bar__subheading">
+                        Size of Asteroid (km)
+                    </h3>
                     <label
                         className="side-bar__label"
                         htmlFor="min-size-slider"
                     >
                         Min Size: {formatNumber(minRangeSize)}
                     </label>
-                
+
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -115,7 +121,7 @@ const SideBar = ({
                     >
                         Max Size: {formatNumber(maxRangeSize)}
                     </label>
-                 
+
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -137,7 +143,7 @@ const SideBar = ({
                     >
                         Min Speed: {formatNumber(minRangeSpeed)}
                     </label>
-                   
+
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -147,14 +153,14 @@ const SideBar = ({
                         value={minRangeSpeed}
                         onChange={handleMinSpeedChange}
                     />
- <br></br>
+                    <br></br>
                     <label
                         className="side-bar__label"
                         htmlFor="max-speed-slider"
                     >
                         Max Speed: {formatNumber(maxRangeSpeed)}
                     </label>
-                
+
                     <input
                         className="side-bar__slider"
                         type="range"

@@ -1,13 +1,17 @@
-import './Navigation.scss';
+import "./Navigation.scss";
 import { useState } from "react";
 import leftArrow from "../../../assets/images/left-arrow.png";
 import rightArrow from "../../../assets/images/right-arrow.png";
+
+//----------------------------------------------------------------------
 
 type NavigationProps = {
     totalItems: number;
     itemsPerPage: number;
     onPageChange: (pageNumber: number) => void;
 };
+
+//----------------------------------------------------------------------
 
 const Navigation = ({
     totalItems,
@@ -25,6 +29,8 @@ const Navigation = ({
         setCurrentPage(pageNumber);
         onPageChange(pageNumber);
     };
+
+    //----------------------------------------------------------------------
 
     return (
         <div className="navigation">

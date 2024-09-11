@@ -18,10 +18,11 @@ function Layout() {
         endDate: string;
     } | null>(null);
 
-    // State for the filters applied to the asteroids (SIZE and SPEED):
+    // State for the filters applied to the asteroids (SIZE, SPEED, HAZARDOUS):
     const [filters, setFilters] = useState<{
         size?: { min: number; max: number };
         speed?: { min: number; max: number };
+        hazardousOnly?: boolean;
     }>({});
 
     // State for range of asteroid SIZES (min/max)
@@ -79,6 +80,17 @@ function Layout() {
 
     //----------------------------------------------------------------------
 
+    // Handle HAZARDOUS checkox:
+
+    const handleHazardousChange = (hazardousOnly: boolean) => {
+        setFilters((prevFilters) => ({
+            ...prevFilters,
+            hazardousOnly,
+        }));
+    };
+
+    //----------------------------------------------------------------------
+
     return (
         <div className="layout">
             <TopBar onSearch={handleSearch} hasSearched={hasSearched} />
@@ -92,6 +104,7 @@ function Layout() {
                         maxSpeed={speedRange.max}
                         onSizeChange={handleSizeChange}
                         onSpeedChange={handleSpeedChange}
+                        onHazardousChange={handleHazardousChange}
                     />
 
                     {dateRange && (

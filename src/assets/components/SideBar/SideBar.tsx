@@ -185,13 +185,15 @@ const SideBar = ({
                 </div>
                 {/* -- HAZARDOUS FILTER -- */}
                 <div className="side-bar__hazardous-filter">
-                    <label>
+                    <label className="side-bar__checkbox">
                         <input
                             type="checkbox"
                             checked={hazardousOnly}
                             onChange={handleHazardousChange}
                         />
                         Hazardous Only
+                        <span className="side-bar__checkbox-indicator"></span>
+                        
                     </label>
                 </div>
             </div>

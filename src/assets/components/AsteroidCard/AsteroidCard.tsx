@@ -1,4 +1,5 @@
 import "./AsteroidCard.scss";
+import { useNavigate } from 'react-router-dom';
 
 //----------------------------------------------------------------------
 
@@ -25,6 +26,8 @@ type Asteroid = {
 //----------------------------------------------------------------------
 
 const AsteroidCard = ({ asteroid }: { asteroid: Asteroid }) => {
+
+    const navigate = useNavigate();
     const maxSize =
         asteroid.estimated_diameter?.kilometers?.estimated_diameter_max || 0;
 
@@ -45,8 +48,12 @@ const AsteroidCard = ({ asteroid }: { asteroid: Asteroid }) => {
 
     //----------------------------------------------------------------------
 
+    const handleCardClick = () => {
+        navigate(`/asteroid-watch/${asteroid.id}`, { state: { asteroid } });
+    };
+
     return (
-        <div className="asteroid-card">
+        <div className="asteroid-card" onClick={handleCardClick}>
             <h3>{asteroid.name}</h3>
             <p>
                 Close Approach On:{" "}

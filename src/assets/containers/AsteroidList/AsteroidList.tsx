@@ -7,11 +7,12 @@ import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 
 type AsteroidListProps = {
     asteroids: any[];
+    searchParams: { startDate: string; endDate: string }; // Include searchParams
 };
 
 //----------------------------------------------------------------------
 
-const AsteroidList = ({ asteroids }: AsteroidListProps) => {
+const AsteroidList = ({ asteroids, searchParams }: AsteroidListProps) => {
     return (
         <div className="asteroid-list">
             <div className="asteroid-list__heading">
@@ -22,6 +23,7 @@ const AsteroidList = ({ asteroids }: AsteroidListProps) => {
                     <AsteroidCard
                         key={`asteroid-${index}`}
                         asteroid={asteroid}
+                        searchParams={searchParams} // Pass searchParams here
                     />
                 ))}
             </div>

@@ -1,31 +1,25 @@
+@use "../../styles/variables" as *;
+
 .profile-bar {
+    margin: 0 auto;
+    margin-top: 3%;
+    position: relative;
+    width: 90%;
+    background-color: $color-dblue;
+    height: 15vh;
     display: flex;
+    border-radius: 15px;
+    align-items: center;
+    box-sizing: border-box;
+    padding-bottom: 2%;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #282c34;
-    color: white;
-}
+    padding: 1% 2%;
 
-.profile-bar__heading h1 {
-    margin: 0;
-}
-
-.profile-bar__actions {
-    display: flex;
-    align-items: center;
-}
-
-button {
-    background-color: #61dafb;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-button:hover {
-    background-color: #21a1f1;
+    &__heading {
+        color: $color-dark;
+        text-shadow: 2px 2px 5px $color-orange;
+        border: none;
+        text-align: left;
+        width: 20%;
+    }
 }

@@ -1,7 +1,8 @@
 import { useLocation } from "react-router-dom";
-
+import asteroidImage from "../../../assets/images/asteroid-image.jpg";
 import "./AsteroidProfile.scss";
 import ProfileBar from "../ProfileBar/ProfileBar";
+import Button from "../Button/button";
 
 type Asteroid = {
     id: string;
@@ -21,6 +22,7 @@ type Asteroid = {
         };
     }[];
     is_potentially_hazardous_asteroid: boolean;
+    nasa_jpl_url?: string;
 };
 
 const AsteroidProfile = () => {
@@ -47,28 +49,45 @@ const AsteroidProfile = () => {
     const closeApproachDate =
         asteroid.close_approach_data[0].close_approach_date;
 
+    const handleMoreInfoClick = () => {
+        if (asteroid.nasa_jpl_url) {
+            window.open(asteroid.nasa_jpl_url, "_blank");
+        }
+    };
+
     return (
         <>
             <ProfileBar />
 
-            <div className="asteroid-profile">
+            <div className="profile">
                 <img
-                    src="/path/to/your/image.jpg"
-                    alt="Asteroid Image"
-                    className="asteroid-image"
+                    className="profile__image"
+                    src={asteroidImage}
+                    alt="Asteroid"
                 />
-                <h3>{asteroid.name}</h3>
-                <p>
-                    Close Approach On:{" "}
-                    {new Date(closeApproachDate).toLocaleDateString()}
-                </p>
-                <p>Size: {maxSize.toFixed(2)} km</p>
-                <p>Speed: {maxSpeed.toFixed(2)} km/s</p>
-                <p>
-                    Hazardous:{" "}
-                    {asteroid.is_potentially_hazardous_asteroid ? "Yes" : "No"}
-                </p>
-                <p>Miss Distance: {missDistance} km</p>
+                <div className="profile__info">
+                    <div className="profile__data">
+                        <h3>Name: {asteroid.name}</h3>
+                        <p>
+                            Close Approach On:{" "}
+                            {new Date(closeApproachDate).toLocaleDateString()}
+                        </p>
+                        <p>Size: {maxSize.toFixed(2)} km</p>
+                        <p>Speed: {maxSpeed.toFixed(2)} km/s</p>
+                        <p>
+                            Hazardous:{" "}
+                            {asteroid.is_potentially_hazardous_asteroid
+                                ? "Yes"
+                                : "No"}
+                        </p>
+                        <p>Miss Distance: {missDistance} km</p>
+                    </div>
+                    <Button
+                        className="profile__button"
+                        text="More Info"
+                        onClick={handleMoreInfoClick}
+                    />
+                </div>
             </div>
         </>
     );

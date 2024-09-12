@@ -1,5 +1,7 @@
+import "./ProfileBar.scss";
 import Button from "../Button/button";
 import { useNavigate } from "react-router-dom";
+
 
 const ProfileBar = () => {
     const navigate = useNavigate();
@@ -10,10 +12,10 @@ const ProfileBar = () => {
 
     return (
         <div className="profile-bar">
-            <div className="top-bar__heading">
+            <div className="profile-bar__heading">
                 <h1>Asteroid Watch</h1>
             </div>
-            <div className="top-bar__search">
+            <div className="profile-bar__button">
                 <Button text="Back to Search Results" onClick={handleBackClick} />
             </div>
         </div>

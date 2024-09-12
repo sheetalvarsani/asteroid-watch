@@ -1,3 +1,40 @@
-.asteroid-profile {
-    color: white;
+@use "../../styles/variables" as *;
+
+.profile {
+    
+    height: 70vh;
+    width: 90%;
+    margin: 2% auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10rem;
+    background-color: $color-orange;
+    border-radius: 8px;
+    
+    &__image {
+        width: 25%;
+        border: 2px solid $color-yellow;
+        border-radius: 8px;
+    }
+
+    &__info {
+        color: $color-dark;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: $color-white;
+        padding: 2rem;
+        border: 2px solid black;
+        box-shadow: 0 0.625rem 1.25rem rgba($color-dark, 0.25);
+        border-radius: 8px;
+        align-content: center;
+    }
+
+    &__button {
+       
+        width: 10rem;
+        margin: 0 auto;
+    }
 }

@@ -1,5 +1,6 @@
 import "./Layout.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import TopBar from "../../components/TopBar/TopBar";
 import SideBar from "../../components/SideBar/SideBar";
 import DisplayArea from "../../components/DisplayArea/DisplayArea";
@@ -9,6 +10,9 @@ import DisplayArea from "../../components/DisplayArea/DisplayArea";
 //----------------------------------------------------------------------
 
 function Layout() {
+
+    const location = useLocation();
+
     const [hasSearched, setHasSearched] = useState(false);
 
     const [dateRange, setDateRange] = useState<{
@@ -36,6 +40,19 @@ function Layout() {
         field: "missDistance",
         order: "asc",
     });
+
+
+    useEffect(() => {
+        const state = location.state as any;
+        if (state) {
+            setDateRange({ startDate: state.startDate, endDate: state.endDate });
+            setFilters(state.filters || {});
+            setSizeRange(state.sizeRange || { min: 0, max: 1000 });
+            setSpeedRange(state.speedRange || { min: 0, max: 100 });
+            setSortBy(state.sortBy || { field: "missDistance", order: "asc" });
+            setHasSearched(state.hasSearched || false);
+        }
+    }, [location.state]);
 
     //----------------------------------------------------------------------
 

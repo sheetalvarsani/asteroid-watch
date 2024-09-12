@@ -10,7 +10,7 @@ function App() {
     <Router>
       <Routes>
      
-        <Route path="/asteroid-watch" element={<Layout />} />
+        <Route path="/asteroid-watch/" element={<Layout />} />
 
         <Route path="/asteroid-watch/:id" element={<AsteroidProfile />} />
       </Routes>

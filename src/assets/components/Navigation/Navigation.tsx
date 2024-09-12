@@ -3,15 +3,11 @@ import { useEffect, useState } from "react";
 import leftArrow from "../../../assets/images/left-arrow.png";
 import rightArrow from "../../../assets/images/right-arrow.png";
 
-//----------------------------------------------------------------------
-
 type NavigationProps = {
     totalItems: number;
     itemsPerPage: number;
     onPageChange: (pageNumber: number) => void;
 };
-
-//----------------------------------------------------------------------
 
 const Navigation = ({
     totalItems,
@@ -20,22 +16,17 @@ const Navigation = ({
 }: NavigationProps) => {
     const [currentPage, setCurrentPage] = useState(1);
 
-    // to find out how many pages there'll be:
     const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // Reset the navigation on new search:
     useEffect(() => {
         setCurrentPage(1);
     }, [totalItems, itemsPerPage]);
 
-    // handle page change:
     const handlePageChange = (pageNumber: number) => {
         if (pageNumber < 1 || pageNumber > totalPages) return;
         setCurrentPage(pageNumber);
         onPageChange(pageNumber);
     };
-
-    //----------------------------------------------------------------------
 
     return (
         <div className="navigation">
@@ -43,7 +34,7 @@ const Navigation = ({
                 className="navigation__arrow"
                 aria-label="Navigate left"
                 onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1} // disable if first page
+                disabled={currentPage === 1}
             >
                 <img
                     src={leftArrow}
@@ -57,7 +48,7 @@ const Navigation = ({
                 className="navigation__arrow"
                 aria-label="Navigate right"
                 onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages} // disable if last page
+                disabled={currentPage === totalPages}
             >
                 <img
                     src={rightArrow}

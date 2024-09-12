@@ -5,7 +5,7 @@ import TopBar from "../../components/TopBar/TopBar";
 import SideBar from "../../components/SideBar/SideBar";
 import DisplayArea from "../../components/DisplayArea/DisplayArea";
 
-function Layout() {
+const Layout = () => {
     const location = useLocation();
 
     const [hasSearched, setHasSearched] = useState(false);

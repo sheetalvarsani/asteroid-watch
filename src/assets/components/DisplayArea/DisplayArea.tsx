@@ -4,6 +4,8 @@ import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 import loadingAsteroid from "../../../assets/images/loading-asteroid.png";
+import menuIcon from "../../../assets/images/menu-icon.png";
+
 
 const itemsPerPage = 6;
 
@@ -15,30 +17,25 @@ type DisplayAreaProps = {
         speed?: { min: number; max: number };
         hazardousOnly?: boolean;
     };
-
     onSizeRangeChange: (minSize: number, maxSize: number) => void;
-
     onSpeedRangeChange: (minSpeed: number, maxSpeed: number) => void;
-
     sortBy: { field: string; order: string };
 };
 
-function DisplayArea({
+const DisplayArea = ({
     startDate,
     endDate,
     filters,
     onSizeRangeChange,
     onSpeedRangeChange,
     sortBy,
-}: DisplayAreaProps) {
+}: DisplayAreaProps) => {
     const [filteredAsteroids, setFilteredAsteroids] = useState<any[]>([]);
-
     const [currentPage, setCurrentPage] = useState(1);
-
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
-
     const [noAsteroidsFound, setNoAsteroidsFound] = useState(false);
+    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -159,12 +156,22 @@ function DisplayArea({
         startIndex + itemsPerPage
     );
 
+    const toggleSidebar = () => {
+        setIsSidebarVisible(!isSidebarVisible);
+    };
+
+
     return (
         <div className="display-area">
+            <div className="display-area__menu-icon" onClick={toggleSidebar}>
+                <img src={menuIcon} alt="Menu Icon" />
+            </div>
+
+ 
+
             <div className="display-area__asteroids">
                 {loading ? (
                     <div className="display-area__loading-container">
-                       
                         <p className="display-area__loading">Loading</p>
                         <img
                             className="display-area__asteroid-image"
@@ -192,6 +199,6 @@ function DisplayArea({
             </div>
         </div>
     );
-}
+};
 
 export default DisplayArea;

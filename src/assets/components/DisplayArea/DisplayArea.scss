@@ -1,4 +1,5 @@
 @use "../../styles/variables" as *;
+@import "../../styles/media";
 
 .display-area {
     display: flex;
@@ -9,8 +10,28 @@
     height: 70vh;
     border-radius: 15px;
     margin-top: 1%;
-    width: 80%;
+    width: 100%;
     color: $color-dark;
+    position: relative;
+
+    @include laptop-desktop {
+        width: 80%;
+    }
+
+    &__menu-icon {
+        position: absolute;
+        z-index: 900;
+        top: 20px; // Position the icon in the top-left corner
+        left: 20px;
+        display: block; // Ensure it's visible by default on mobile
+        width: 30px; // Adjust icon size if needed
+        cursor: pointer;
+        color: white;
+
+        @include laptop-desktop {
+            display: none;
+        }
+    }
 
     &__loading,
     &__error {
@@ -48,3 +69,5 @@
         justify-content: center;
     }
 }
+
+

@@ -1,7 +1,5 @@
 import "./AsteroidCard.scss";
-import { useNavigate } from 'react-router-dom';
-
-//----------------------------------------------------------------------
+import { useNavigate } from "react-router-dom";
 
 type Asteroid = {
     id: string;
@@ -23,10 +21,7 @@ type Asteroid = {
     is_potentially_hazardous_asteroid: boolean;
 };
 
-//----------------------------------------------------------------------
-
 const AsteroidCard = ({ asteroid }: { asteroid: Asteroid }) => {
-
     const navigate = useNavigate();
     const maxSize =
         asteroid.estimated_diameter?.kilometers?.estimated_diameter_max || 0;
@@ -45,8 +40,6 @@ const AsteroidCard = ({ asteroid }: { asteroid: Asteroid }) => {
 
     const closeApproachDate =
         asteroid.close_approach_data[0].close_approach_date;
-
-    //----------------------------------------------------------------------
 
     const handleCardClick = () => {
         navigate(`/asteroid-watch/${asteroid.id}`, { state: { asteroid } });

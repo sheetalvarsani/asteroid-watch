@@ -1,16 +1,9 @@
 import "./AsteroidList.scss";
 import AsteroidCard from "../../components/AsteroidCard/AsteroidCard";
 
-//----------------------------------------------------------------------
-// | ASTEROID CARD |
-//----------------------------------------------------------------------
-
 type AsteroidListProps = {
     asteroids: any[];
- 
 };
-
-//----------------------------------------------------------------------
 
 const AsteroidList = ({ asteroids }: AsteroidListProps) => {
     return (

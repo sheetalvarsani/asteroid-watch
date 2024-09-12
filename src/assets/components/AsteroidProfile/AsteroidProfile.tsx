@@ -1,6 +1,6 @@
+import "./AsteroidProfile.scss";
 import { useLocation } from "react-router-dom";
 import asteroidImage from "../../../assets/images/asteroid-image.jpg";
-import "./AsteroidProfile.scss";
 import ProfileBar from "../ProfileBar/ProfileBar";
 import Button from "../Button/button";
 

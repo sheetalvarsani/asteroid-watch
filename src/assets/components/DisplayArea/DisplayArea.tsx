@@ -5,29 +5,23 @@ import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 import loadingAsteroid from "../../../assets/images/loading-asteroid.png";
 
-//----------------------------------------------------------------------
-// | ASTEROID LIST | NAVIGATION |
-//----------------------------------------------------------------------
-
-const itemsPerPage = 6; // change if needed
+const itemsPerPage = 6;
 
 type DisplayAreaProps = {
     startDate: string;
     endDate: string;
     filters: {
-        size?: { min: number; max: number }; // SIZE
-        speed?: { min: number; max: number }; // SPEED
-        hazardousOnly?: boolean; // HAZARDOUS
+        size?: { min: number; max: number };
+        speed?: { min: number; max: number };
+        hazardousOnly?: boolean;
     };
-    // update SIZE range in LAYOUT:
+
     onSizeRangeChange: (minSize: number, maxSize: number) => void;
-    // update SPEED range in LAYOUT:
+
     onSpeedRangeChange: (minSpeed: number, maxSpeed: number) => void;
-    // Sort state:
+
     sortBy: { field: string; order: string };
 };
-
-//----------------------------------------------------------------------
 
 function DisplayArea({
     startDate,
@@ -37,32 +31,21 @@ function DisplayArea({
     onSpeedRangeChange,
     sortBy,
 }: DisplayAreaProps) {
-    // Store list of asteroids:
     const [filteredAsteroids, setFilteredAsteroids] = useState<any[]>([]);
 
-    // Managing current page in navigation
     const [currentPage, setCurrentPage] = useState(1);
 
-    // Loading / Error mesaages
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
-    // Message for no asteroids found
     const [noAsteroidsFound, setNoAsteroidsFound] = useState(false);
 
-    //----------------------------------------------------------------------
-
-    // Fetch asteroids from API based on date range, filters, and sorting
-
     useEffect(() => {
-        setLoading(true); // Show LOADING message
-        setNoAsteroidsFound(false); // Reset no asteroids found message
+        setLoading(true);
+        setNoAsteroidsFound(false);
 
         fetchAsteroids(startDate, endDate)
             .then((fetchedAsteroids) => {
-
-                //----------------------------------------------
-                // Calculate min and max SIZES of asteroids
                 const sizes = fetchedAsteroids.map(
                     (asteroid: any) =>
                         asteroid.estimated_diameter.kilometers
@@ -70,10 +53,9 @@ function DisplayArea({
                 );
                 const minSize = Math.min(...sizes);
                 const maxSize = Math.max(...sizes);
-                onSizeRangeChange(minSize, maxSize); // Pass SIZE range to LAYOUT
 
-                //----------------------------------------------
-                // Calculate min and max SPEEDS of asteroids
+                onSizeRangeChange(minSize, maxSize);
+
                 const speeds = fetchedAsteroids.map(
                     (asteroid: any) =>
                         parseFloat(
@@ -83,10 +65,9 @@ function DisplayArea({
                 );
                 const minSpeed = Math.min(...speeds);
                 const maxSpeed = Math.max(...speeds);
-                onSpeedRangeChange(minSpeed, maxSpeed); // Pass SPEED range to LAYOUT
 
-                //----------------------------------------------
-                // Apply filters:
+                onSpeedRangeChange(minSpeed, maxSpeed);
+
                 const filtered = fetchedAsteroids.filter((asteroid: any) => {
                     const sizeMax =
                         asteroid.estimated_diameter?.kilometers
@@ -102,8 +83,6 @@ function DisplayArea({
                     const isHazardous =
                         asteroid.is_potentially_hazardous_asteroid;
 
-                    //----------------------------------------------
-                    // Filter based on size, speed, and hazardous status
                     return (
                         (filters.size
                             ? filters.size.min <= sizeMax &&
@@ -116,9 +95,6 @@ function DisplayArea({
                         (filters.hazardousOnly ? isHazardous === true : true)
                     );
                 });
-
-                //----------------------------------------------
-                // SORT filtered asteroids:
 
                 const sorted = filtered.sort((a, b) => {
                     let compareValue = 0;
@@ -155,11 +131,8 @@ function DisplayArea({
                         : -compareValue;
                 });
 
-                setFilteredAsteroids(sorted); // update results
+                setFilteredAsteroids(sorted);
 
-                //----------------------------------------------
-
-                // Show no asteroids found message if no results
                 if (sorted.length === 0) {
                     setNoAsteroidsFound(true);
                 } else {
@@ -174,31 +147,24 @@ function DisplayArea({
             });
     }, [startDate, endDate, filters, sortBy]);
 
-    //----------------------------------------------------------------------
-
-    // calculate total number of asteroids returned for page navigation
     const totalItems = filteredAsteroids.length;
 
-    // Handle page changes for page navigation (Navigation Component):
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
     };
 
-    // calculate when to slice asteroid array to get asteroids per page:
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentAsteroids = filteredAsteroids.slice(
         startIndex,
         startIndex + itemsPerPage
     );
 
-    //----------------------------------------------------------------------
-
     return (
         <div className="display-area">
             <div className="display-area__asteroids">
                 {loading ? (
                     <div className="display-area__loading-container">
-                        {/* LOADING message while data being fetched */}
+                       
                         <p className="display-area__loading">Loading</p>
                         <img
                             className="display-area__asteroid-image"
@@ -207,15 +173,12 @@ function DisplayArea({
                         />
                     </div>
                 ) : error ? (
-                    // ERROR message if issue
                     <p className="display-area__error">Error: {error}</p>
                 ) : noAsteroidsFound ? (
-                    // NO ASTEROIDS FOUND message
                     <h2 className="display-area__no-asteroids">
                         No Asteroids Found!
                     </h2>
                 ) : (
-                    // Asteroid list of results after filtering/sorting
                     <AsteroidList asteroids={currentAsteroids} />
                 )}
             </div>

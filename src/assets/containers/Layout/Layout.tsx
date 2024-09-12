@@ -1,14 +1,13 @@
 import "./Layout.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import TopBar from "../../components/TopBar/TopBar";
 import SideBar from "../../components/SideBar/SideBar";
 import DisplayArea from "../../components/DisplayArea/DisplayArea";
 
-//----------------------------------------------------------------------
-// | TOP BAR | SIDE BAR | DISPLAY AREA |
-//----------------------------------------------------------------------
-
 function Layout() {
+    const location = useLocation();
+
     const [hasSearched, setHasSearched] = useState(false);
 
     const [dateRange, setDateRange] = useState<{
@@ -37,14 +36,22 @@ function Layout() {
         order: "asc",
     });
 
-    //----------------------------------------------------------------------
+    useEffect(() => {
+        const state = location.state as any;
+        if (state) {
+            setDateRange({
+                startDate: state.startDate,
+                endDate: state.endDate,
+            });
+
+            setHasSearched(state.hasSearched || false);
+        }
+    }, [location.state]);
 
     const handleSearch = (startDate: string, endDate: string) => {
         setDateRange({ startDate, endDate });
         setHasSearched(true);
     };
-
-    //----------------------------------------------------------------------
 
     const handleSizeChange = (minSize: number, maxSize: number) => {
         setFilters((prevFilters) => ({
@@ -57,8 +64,6 @@ function Layout() {
         setSizeRange({ min: minSize, max: maxSize });
     };
 
-    //----------------------------------------------------------------------
-
     const handleSpeedChange = (minSpeed: number, maxSpeed: number) => {
         setFilters((prevFilters) => ({
             ...prevFilters, // to keep previous filters filtered
@@ -70,8 +75,6 @@ function Layout() {
         setSpeedRange({ min: minSpeed, max: maxSpeed });
     };
 
-    //----------------------------------------------------------------------
-
     const handleHazardousChange = (hazardousOnly: boolean) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
@@ -79,13 +82,9 @@ function Layout() {
         }));
     };
 
-    //----------------------------------------------------------------------
-
     const handleSortChange = (field: string, order: string) => {
         setSortBy({ field, order });
     };
-
-    //----------------------------------------------------------------------
 
     return (
         <div className="layout">

@@ -1,0 +1,25 @@
+@use "../../styles/variables" as *;
+
+.profile-bar {
+    margin: 0 auto;
+    margin-top: 3%;
+    position: relative;
+    width: 90%;
+    background-color: $color-dblue;
+    height: 15vh;
+    display: flex;
+    border-radius: 15px;
+    align-items: center;
+    box-sizing: border-box;
+    padding-bottom: 2%;
+    justify-content: space-between;
+    padding: 1% 2%;
+
+    &__heading {
+        color: $color-dark;
+        text-shadow: 2px 2px 5px $color-orange;
+        border: none;
+        text-align: left;
+        width: 20%;
+    }
+}

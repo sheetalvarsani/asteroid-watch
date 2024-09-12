@@ -1,14 +1,19 @@
 @use "../../styles/variables" as *;
+@import "../../styles/media";
 
 .layout{
 
-    height: 100vh;
+    
     width: 90%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    @include laptop-desktop {
+        height: 100vh;
+    }
 
     &__content {
         display: flex;

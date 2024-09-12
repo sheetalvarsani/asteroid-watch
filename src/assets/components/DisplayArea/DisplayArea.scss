@@ -7,24 +7,26 @@
     justify-content: center;
     align-items: center;
     background-color: $color-orange;
-    height: 70vh;
+    margin: 5% auto;
     border-radius: 15px;
-    margin-top: 1%;
+    
     width: 100%;
     color: $color-dark;
     position: relative;
 
     @include laptop-desktop {
         width: 80%;
+        height: 75vh;
+        margin: 1% auto;
     }
 
     &__menu-icon {
         position: absolute;
         z-index: 900;
-        top: 20px; // Position the icon in the top-left corner
+        top: 20px; 
         left: 20px;
-        display: block; // Ensure it's visible by default on mobile
-        width: 30px; // Adjust icon size if needed
+        display: block; 
+        width: 30px; 
         cursor: pointer;
         color: white;
 

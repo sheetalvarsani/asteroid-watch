@@ -9,29 +9,24 @@ import DisplayArea from "../../components/DisplayArea/DisplayArea";
 //----------------------------------------------------------------------
 
 function Layout() {
-    // State to track if search has been clicked:
     const [hasSearched, setHasSearched] = useState(false);
 
-    // State for the selected date range:
     const [dateRange, setDateRange] = useState<{
         startDate: string;
         endDate: string;
     } | null>(null);
 
-    // State for the filters applied to the asteroids (SIZE, SPEED, HAZARDOUS):
     const [filters, setFilters] = useState<{
         size?: { min: number; max: number };
         speed?: { min: number; max: number };
         hazardousOnly?: boolean;
     }>({});
 
-    // State for range of asteroid SIZES (min/max)
     const [sizeRange, setSizeRange] = useState<{ min: number; max: number }>({
         min: 0,
         max: 1000,
     });
 
-    // State for range of asteroid SPEEDS (min/max)
     const [speedRange, setSpeedRange] = useState<{ min: number; max: number }>({
         min: 0,
         max: 100,
@@ -44,8 +39,6 @@ function Layout() {
 
     //----------------------------------------------------------------------
 
-    // Handle search from TOPBAR - updates date range and set search treu:
-
     const handleSearch = (startDate: string, endDate: string) => {
         setDateRange({ startDate, endDate });
         setHasSearched(true);
@@ -53,23 +46,18 @@ function Layout() {
 
     //----------------------------------------------------------------------
 
-    // Handle changes in SIZE filter - updates filters with MIN and MAX values:
-
     const handleSizeChange = (minSize: number, maxSize: number) => {
         setFilters((prevFilters) => ({
-            ...prevFilters, // to keep previous filters filtered
+            ...prevFilters,
             size: { min: minSize, max: maxSize },
         }));
     };
 
-    // Handle updates to the available SIZE range (min and max) from DISPLAYAREA
     const handleSizeRangeChange = (minSize: number, maxSize: number) => {
         setSizeRange({ min: minSize, max: maxSize });
     };
 
     //----------------------------------------------------------------------
-
-    // Handle changes in SPEED filter - updates filters with MIN and MAX values:
 
     const handleSpeedChange = (minSpeed: number, maxSpeed: number) => {
         setFilters((prevFilters) => ({
@@ -78,14 +66,11 @@ function Layout() {
         }));
     };
 
-    // Handle updates to the available SPEED range (min and max) from DISPLAYAREA
     const handleSpeedRangeChange = (minSpeed: number, maxSpeed: number) => {
         setSpeedRange({ min: minSpeed, max: maxSpeed });
     };
 
     //----------------------------------------------------------------------
-
-    // Handle HAZARDOUS checkox:
 
     const handleHazardousChange = (hazardousOnly: boolean) => {
         setFilters((prevFilters) => ({
@@ -95,8 +80,6 @@ function Layout() {
     };
 
     //----------------------------------------------------------------------
-
-    // handle sorting:
 
     const handleSortChange = (field: string, order: string) => {
         setSortBy({ field, order });

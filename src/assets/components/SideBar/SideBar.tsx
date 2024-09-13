@@ -98,23 +98,8 @@ const SideBar = ({
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">Filter By:</h2>
 
-                <div className="side-bar__sort-filter">
-                    <select onChange={handleSortChange}>
-                        <option value="size-asc">Size (Low to High)</option>
-                        <option value="size-desc">Size (High to Low)</option>
-                        <option value="speed-asc">Speed (Low to High)</option>
-                        <option value="speed-desc">Speed (High to Low)</option>
-                        <option value="missDistance-asc">
-                            Miss Dist. (Low to High)
-                        </option>
-                        <option value="missDistance-desc">
-                            Miss Dist. (High to Low)
-                        </option>
-                    </select>
-                </div>
-
                 <div className="side-bar__size-filter">
-                    <h3 className="side-bar__subheading">
+                    <h3 className="side-bar__subheading-size">
                         Size of Asteroid (km)
                     </h3>
                     <label
@@ -154,7 +139,7 @@ const SideBar = ({
                 </div>
 
                 <div className="side-bar__speed-filter">
-                    <h3 className="side-bar__subheading">
+                    <h3 className="side-bar__subheading-speed">
                         Speed of Asteroid (km/s)
                     </h3>
                     <label
@@ -202,6 +187,22 @@ const SideBar = ({
                         Hazardous
                         <span className="side-bar__checkbox-indicator"></span>
                     </label>
+                </div>
+
+                <div className="side-bar__sort-filter">
+                    <h2 className="side-bar__heading">Sort By:</h2>
+                    <select onChange={handleSortChange}>
+                        <option value="size-asc">Size (Low to High)</option>
+                        <option value="size-desc">Size (High to Low)</option>
+                        <option value="speed-asc">Speed (Low to High)</option>
+                        <option value="speed-desc">Speed (High to Low)</option>
+                        <option value="missDistance-asc">
+                            Miss Dist. (Low to High)
+                        </option>
+                        <option value="missDistance-desc">
+                            Miss Dist. (High to Low)
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>

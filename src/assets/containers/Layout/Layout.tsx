@@ -66,7 +66,7 @@ const Layout = () => {
 
     const handleSpeedChange = (minSpeed: number, maxSpeed: number) => {
         setFilters((prevFilters) => ({
-            ...prevFilters, // to keep previous filters filtered
+            ...prevFilters,
             speed: { min: minSpeed, max: maxSpeed },
         }));
     };

@@ -57,41 +57,40 @@ const AsteroidProfile = () => {
 
     return (
         <>
-            
-
             <div className="profile">
+                <ProfileBar />
 
-            <ProfileBar />
-
-            <div className="profile__content">
-                <img
-                    className="profile__image"
-                    src={asteroidImage}
-                    alt="Asteroid"
-                />
-                <div className="profile__info">
-                    <div className="profile__data">
-                        <h3>Name: {asteroid.name}</h3>
-                        <p>
-                            Close Approach On:{" "}
-                            {new Date(closeApproachDate).toLocaleDateString()}
-                        </p>
-                        <p>Size: {maxSize.toFixed(2)} km</p>
-                        <p>Speed: {maxSpeed.toFixed(2)} km/s</p>
-                        <p>
-                            Hazardous:{" "}
-                            {asteroid.is_potentially_hazardous_asteroid
-                                ? "Yes"
-                                : "No"}
-                        </p>
-                        <p>Miss Distance: {missDistance} km</p>
-                    </div>
-                    <Button
-                        className="profile__button"
-                        text="More Info"
-                        onClick={handleMoreInfoClick}
+                <div className="profile__content">
+                    <img
+                        className="profile__image"
+                        src={asteroidImage}
+                        alt="Asteroid"
                     />
-                </div>
+                    <div className="profile__info">
+                        <div className="profile__data">
+                            <h3>Name: {asteroid.name}</h3>
+                            <p>
+                                Close Approach On:{" "}
+                                {new Date(
+                                    closeApproachDate
+                                ).toLocaleDateString()}
+                            </p>
+                            <p>Size: {maxSize.toFixed(2)} km</p>
+                            <p>Speed: {maxSpeed.toFixed(2)} km/s</p>
+                            <p>
+                                Hazardous:{" "}
+                                {asteroid.is_potentially_hazardous_asteroid
+                                    ? "Yes"
+                                    : "No"}
+                            </p>
+                            <p>Miss Distance: {missDistance} km</p>
+                        </div>
+                        <Button
+                            className="profile__button"
+                            text="More Info"
+                            onClick={handleMoreInfoClick}
+                        />
+                    </div>
                 </div>
             </div>
         </>

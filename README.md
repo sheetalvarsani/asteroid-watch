@@ -179,4 +179,7 @@ npm run dev
     -   The data for this application is provided by the [NASA NeoWs API](https://api.nasa.gov/neo/rest/v1/feed). The API provides information about near-Earth objects and their trajectories.
 
 -   **Image Attribution**
-    -   <a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icons created by Freepik - Flaticon</a>
+    -   <a href="https://www.flaticon.com/free-icons/asteroid" title="Asteroid icons">Asteroid icon created by Freepik - Flaticon</a>
+
+    - <a href="https://pixabay.com/users/crocerossina-39485415/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=8342895" title="Image by Cathe from Pixabay">Asteroid Image by Cathe - Pixabay</a>
+

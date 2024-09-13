@@ -2,8 +2,8 @@
 @import "../../styles/media";
 
 .top-bar {
-    position: relative;
-    z-index: 5;
+
+   
     width: 100%;
     background-color: $color-dblue;
     height: 90vh;
@@ -16,22 +16,33 @@
     margin: 2% auto;
 
     @include laptop-desktop {
+        position: relative;
         height: 50vh;
-
+        z-index: 5;
     }
 
     &--searched {
         margin: 0;
         height: 15vh;
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        grid-template-areas: "heading search search search";
+        display: flex;
+        flex-direction: row;
         align-content: center;
         justify-content: center;
         padding: 1% 2%;
 
         h1 {
             text-align: left;
+        }
+
+        @include laptop-desktop {
+            margin: 0;
+            height: 15vh;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            grid-template-areas: "heading search search search";
+            align-content: center;
+            justify-content: center;
+            padding: 1% 2%;
         }
     }
 
@@ -47,12 +58,14 @@
     &__tagline {
         margin: 0;
         color: $color-dark;
-        display: flex;
-    
+        display: none;
+
         padding: 0 50px;
+
 
         @include laptop-desktop {
             margin: 0;
+            display: flex;
             color: $color-dark;
         }
     }
@@ -74,7 +87,6 @@
     }
 
     input {
-    
         padding: 0.6rem 1.5rem;
         text-align: center;
         border-radius: 8px;
@@ -93,7 +105,6 @@
             margin-right: 3rem;
             padding: 0.5rem 1.5rem;
             width: 140px;
-           
         }
     }
 

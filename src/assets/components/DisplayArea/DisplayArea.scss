@@ -2,19 +2,19 @@
 @import "../../styles/media";
 
 .display-area {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: $color-orange;
     margin: 5% auto;
     border-radius: 15px;
-    
+    height: 70vh;
     width: 100%;
     color: $color-dark;
     position: relative;
 
     @include laptop-desktop {
+        display: flex;
+        flex-direction: column;
         width: 80%;
         height: 75vh;
         margin: 1% auto;
@@ -23,10 +23,10 @@
     &__menu-icon {
         position: absolute;
         z-index: 900;
-        top: 20px; 
+        top: 20px;
         left: 20px;
-        display: block; 
-        width: 30px; 
+        display: block;
+        width: 30px;
         cursor: pointer;
         color: white;
 
@@ -71,5 +71,3 @@
         justify-content: center;
     }
 }
-
-

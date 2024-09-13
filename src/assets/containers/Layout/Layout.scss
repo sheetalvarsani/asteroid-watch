@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 
     @include laptop-desktop {
         height: 100vh;

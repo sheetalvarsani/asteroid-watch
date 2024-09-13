@@ -7,8 +7,9 @@
 Asteroid Watch: A React TypeScript application that allows users to track and filter near-Earth asteroids. The app uses the <strong>NASA NeoWs API</strong> to fetch asteroid data and provides a user-friendly interface to display and filter this information.
 
 -   **Date Range Selection:** Users can select a start and end date to view asteroids that approached Earth within the selected timeframe.
--   **Asteroid Filtering:** Users can filter asteroids by size, speed, and hazardous status.
--   **Display Area:** Asteroids are displayed in cards showing their image, name, and other details, with content navigation to display 20(?) asteroid cards per page.
+-   **Asteroid Filtering:** Users can filter asteroids by size, speed, and hazardous status. Users can also sort the returned asteroids by size, speed, and miss distance (low to high or high to low).
+-   **Display Area:** Asteroids are displayed in cards showing their image, name, and other details, with content navigation to display a certain amount of asteroid cards per page.
+-   **Asteroid Profile:** Each asteroid card can be clicked on which takes the user to a profile page of the asteroid, showing the asteroid's info and a link to a page with more info on that specific asteroid.
 
 <br>
 

@@ -1,9 +1,6 @@
 #root {
     font-family: "Space Mono", monospace;
     font-weight: 600;
-    display: flex;
-    flex-direction: column;
-    /* height: 100vh; */
     width: 100%;
     margin: 0 auto;
     text-align: center;

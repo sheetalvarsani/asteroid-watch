@@ -81,6 +81,6 @@ const TopBar = ({ onSearch, hasSearched }: TopBarProps) => {
             </div>
         </div>
     );
-}
+};
 
 export default TopBar;

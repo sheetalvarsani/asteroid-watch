@@ -1,6 +1,5 @@
 import "./SideBar.scss";
 import { useState, useEffect } from "react";
-import closeIcon from "../../images/close-icon.png"
 
 type SideBarProps = {
     minSize: number;
@@ -11,8 +10,6 @@ type SideBarProps = {
     onSpeedChange: (minSpeed: number, maxSpeed: number) => void;
     onHazardousChange: (hazardousOnly: boolean) => void;
     onSortChange: (sortBy: string, sortOrder: string) => void;
-    isVisible: boolean;
-    onClose: () => void;
 };
 
 const SideBar = ({
@@ -24,8 +21,6 @@ const SideBar = ({
     onSpeedChange,
     onHazardousChange,
     onSortChange,
-    isVisible,
-    onClose,
 }: SideBarProps) => {
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
@@ -99,15 +94,7 @@ const SideBar = ({
     const formatNumber = (num: number) => num.toFixed(2);
 
     return (
-        <div className={`side-bar ${isVisible ? "side-bar--visible" : ""}`}>
-            <div className="side-bar__icon">
-                <img
-                    className="side-bar__close-icon"
-                    src={closeIcon}
-                    alt="Close Icon"
-                    onClick={onClose}
-                />
-            </div>
+        <div className="side-bar">
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">Filter By:</h2>
 

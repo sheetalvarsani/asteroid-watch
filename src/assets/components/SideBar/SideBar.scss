@@ -3,11 +3,6 @@
 
 .side-bar {
     display: none;
-  
-
-    &--visible {
-        display: block;
-    }
 
     @include laptop-desktop {
         background-color: $color-yellow;
@@ -149,7 +144,7 @@
         border: solid transparent;
         border-width: 0 3px 3px 0;
         transform: rotate(45deg);
-        opacity: 0; /* Hide tick by default */
+        opacity: 0;
         transition: opacity 0.2s;
     }
 

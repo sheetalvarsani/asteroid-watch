@@ -14,25 +14,10 @@
     align-items: center;
     box-sizing: border-box;
     padding-bottom: 2%;
-   
     padding: 1% 2%;
 
     @include laptop-desktop {
-        margin: 0 auto;
-        margin-top: 3%;
-        position: relative;
-        width: 90%;
-        background-color: $color-dblue;
-        height: 15vh;
-    
         flex-direction: row;
-        border-radius: 15px;
-        align-items: center;
-        box-sizing: border-box;
-        padding-bottom: 2%;
-       
-        padding: 1% 2%;
-        display: flex;
         justify-content: space-between;
     }
 
@@ -44,11 +29,9 @@
         text-align: center;
         width: 150%;
 
-
         @include laptop-desktop {
             text-align: left;
             width: 20%;
         }
     }
 }
-

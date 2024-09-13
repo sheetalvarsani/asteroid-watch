@@ -27,7 +27,6 @@
         display: none;
         width: 0%;
 
-
         @include laptop-desktop {
             display: inline;
             width: 25%;
@@ -52,6 +51,5 @@
     &__button {
         width: 10rem;
         margin: 0 auto;
-   
     }
 }

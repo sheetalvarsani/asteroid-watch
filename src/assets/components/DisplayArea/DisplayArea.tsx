@@ -4,8 +4,6 @@ import AsteroidList from "../../containers/AsteroidList/AsteroidList";
 import Navigation from "../Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 import loadingAsteroid from "../../../assets/images/loading-asteroid.png";
-import menuIcon from "../../../assets/images/menu-icon.png";
-
 
 const itemsPerPage = 6;
 
@@ -35,7 +33,6 @@ const DisplayArea = ({
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
     const [noAsteroidsFound, setNoAsteroidsFound] = useState(false);
-    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -156,19 +153,8 @@ const DisplayArea = ({
         startIndex + itemsPerPage
     );
 
-    const toggleSidebar = () => {
-        setIsSidebarVisible(!isSidebarVisible);
-    };
-
-
     return (
         <div className="display-area">
-            <div className="display-area__menu-icon" onClick={toggleSidebar}>
-                <img src={menuIcon} alt="Menu Icon" />
-            </div>
-
- 
-
             <div className="display-area__asteroids">
                 {loading ? (
                     <div className="display-area__loading-container">

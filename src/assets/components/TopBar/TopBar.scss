@@ -15,20 +15,9 @@
     box-sizing: border-box;
     margin: 2% auto;
 
-    
-
     @include laptop-desktop {
-        position: relative;
-        z-index: 5;
-        width: 100%;
-        background-color: $color-dblue;
         height: 50vh;
-        display: flex;
-        border-radius: 15px;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        margin: 2% auto;
+
     }
 
     &--searched {
@@ -46,7 +35,6 @@
         }
     }
 
-
     &__heading {
         color: $color-dark;
         text-shadow: 2px 2px 5px $color-orange;
@@ -60,14 +48,13 @@
         margin: 0;
         color: $color-dark;
         display: flex;
-        // flex-wrap: wrap;
+    
         padding: 0 50px;
 
         @include laptop-desktop {
             margin: 0;
             color: $color-dark;
         }
-
     }
 
     &__search {
@@ -87,8 +74,8 @@
     }
 
     input {
-        margin-right: 3rem;
-        padding: 0.5rem 1.5rem;
+    
+        padding: 0.6rem 1.5rem;
         text-align: center;
         border-radius: 8px;
         font-family: "Space Mono", monospace;
@@ -96,24 +83,28 @@
         border: 2px solid black;
         width: 140px;
         background-color: $color-white;
+        margin: 1rem auto;
 
         &:hover {
             cursor: pointer;
         }
+
+        @include laptop-desktop {
+            margin-right: 3rem;
+            padding: 0.5rem 1.5rem;
+            width: 140px;
+           
+        }
     }
 
     button {
-        margin-left: 0;
+        margin: 1rem auto;
 
         @include laptop-desktop {
             margin-left: 1rem;
         }
     }
-
-
 }
-
-
 
 .top-bar .react-datepicker {
     background-color: $color-dblue;

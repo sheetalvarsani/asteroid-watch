@@ -100,8 +100,9 @@ const Layout = () => {
                         onSizeChange={handleSizeChange}
                         onSpeedChange={handleSpeedChange}
                         onHazardousChange={handleHazardousChange}
-                        onSortChange={handleSortChange}
-                    />
+                        onSortChange={handleSortChange} isVisible={false} onClose={function (): void {
+                            throw new Error("Function not implemented.");
+                        } }                    />
 
                     {dateRange && (
                         <DisplayArea

@@ -10,7 +10,7 @@ type TopBarProps = {
     hasSearched: boolean;
 };
 
-function TopBar({ onSearch, hasSearched }: TopBarProps) {
+const TopBar = ({ onSearch, hasSearched }: TopBarProps) => {
     const navigate = useNavigate();
 
     const [startDate, setStartDate] = useState<Date | null>(null);

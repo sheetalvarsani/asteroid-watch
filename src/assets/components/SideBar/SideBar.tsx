@@ -1,20 +1,19 @@
 import "./SideBar.scss";
-import React, { useState, useEffect } from "react";
-
-//----------------------------------------------------------------------
+import { useState, useEffect } from "react";
+import closeIcon from "../../images/close-icon.png"
 
 type SideBarProps = {
-    minSize: number; // Size Filter
-    maxSize: number; // Size Filter
-    minSpeed: number; // Speed Filter
-    maxSpeed: number; // Speed Filter
-    onSizeChange: (minSize: number, maxSize: number) => void; // Size filter
-    onSpeedChange: (minSpeed: number, maxSpeed: number) => void; // Speed filter
-    onHazardousChange: (hazardousOnly: boolean) => void; // Hazardous filter
-    onSortChange: (sortBy: string, sortOrder: string) => void; // sorting sidebar
+    minSize: number;
+    maxSize: number;
+    minSpeed: number;
+    maxSpeed: number;
+    onSizeChange: (minSize: number, maxSize: number) => void;
+    onSpeedChange: (minSpeed: number, maxSpeed: number) => void;
+    onHazardousChange: (hazardousOnly: boolean) => void;
+    onSortChange: (sortBy: string, sortOrder: string) => void;
+    isVisible: boolean;
+    onClose: () => void;
 };
-
-//----------------------------------------------------------------------
 
 const SideBar = ({
     minSize,
@@ -25,6 +24,8 @@ const SideBar = ({
     onSpeedChange,
     onHazardousChange,
     onSortChange,
+    isVisible,
+    onClose,
 }: SideBarProps) => {
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
@@ -32,21 +33,16 @@ const SideBar = ({
     const [maxRangeSpeed, setMaxRangeSpeed] = useState<number>(maxSpeed);
     const [hazardousOnly, setHazardousOnly] = useState<boolean>(false);
 
-    //----------------------------------------------------------------------
-
-    // Update range when minSize or maxSize changes
     useEffect(() => {
         setMinRangeSize(minSize);
         setMaxRangeSize(maxSize);
     }, [minSize, maxSize]);
 
-    // Update range when minSpeed or maxSpeed changes
     useEffect(() => {
         setMinRangeSpeed(minSpeed);
         setMaxRangeSpeed(maxSpeed);
     }, [minSpeed, maxSpeed]);
 
-    // Handle changes to hazardous checkbox
     const handleHazardousChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
@@ -55,16 +51,11 @@ const SideBar = ({
         onHazardousChange(isChecked);
     };
 
-    //----------------------------------------------------------------------
-
-    // Handle changes to the SIZE slider (TWO SEPARATE SLIDERS FOR MIN AND MAX)
-
     const handleMinSizeChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMinSize = parseFloat(event.target.value);
         if (newMinSize <= maxRangeSize) {
-            // min slider doesn't go higher than max value
             setMinRangeSize(newMinSize);
             onSizeChange(newMinSize, maxRangeSize);
         }
@@ -75,22 +66,16 @@ const SideBar = ({
     ) => {
         const newMaxSize = parseFloat(event.target.value);
         if (newMaxSize >= minRangeSize) {
-            // max slider doesn't go lowerr than min
             setMaxRangeSize(newMaxSize);
             onSizeChange(minRangeSize, newMaxSize);
         }
     };
-
-    //----------------------------------------------------------------------
-
-    // Handle changes to the SPEED slider (TWO SEPARATE SLIDERS FOR MIN AND MAX)
 
     const handleMinSpeedChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         const newMinSpeed = parseFloat(event.target.value);
         if (newMinSpeed <= maxRangeSpeed) {
-            // min slider doesn't go higher than max value
             setMinRangeSpeed(newMinSpeed);
             onSpeedChange(newMinSpeed, maxRangeSpeed);
         }
@@ -101,33 +86,31 @@ const SideBar = ({
     ) => {
         const newMaxSpeed = parseFloat(event.target.value);
         if (newMaxSpeed >= minRangeSpeed) {
-            // max slider doesn't go lower than min value
             setMaxRangeSpeed(newMaxSpeed);
             onSpeedChange(minRangeSpeed, newMaxSpeed);
         }
     };
-
-    //----------------------------------------------------------------------
-
-    // Handle sorting changes:
 
     const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const [sortBy, sortOrder] = event.target.value.split("-");
         onSortChange(sortBy, sortOrder);
     };
 
-    //----------------------------------------------------------------------
-
-    // show values to 2 decimal plaaces on label of slider:
     const formatNumber = (num: number) => num.toFixed(2);
 
-    //----------------------------------------------------------------------
-
     return (
-        <div className="side-bar">
+        <div className={`side-bar ${isVisible ? "side-bar--visible" : ""}`}>
+            <div className="side-bar__icon">
+                <img
+                    className="side-bar__close-icon"
+                    src={closeIcon}
+                    alt="Close Icon"
+                    onClick={onClose}
+                />
+            </div>
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">Filter By:</h2>
-                {/* -- SORT FILTER -- */}
+
                 <div className="side-bar__sort-filter">
                     <select onChange={handleSortChange}>
                         <option value="size-asc">Size (Low to High)</option>
@@ -142,7 +125,7 @@ const SideBar = ({
                         </option>
                     </select>
                 </div>
-                {/* -- SIZE FILTER -- */}
+
                 <div className="side-bar__size-filter">
                     <h3 className="side-bar__subheading">
                         Size of Asteroid (km)
@@ -182,7 +165,7 @@ const SideBar = ({
                         onChange={handleMaxSizeChange}
                     />
                 </div>
-                {/* -- SPEED FILTER -- */}
+
                 <div className="side-bar__speed-filter">
                     <h3 className="side-bar__subheading">
                         Speed of Asteroid (km/s)
@@ -221,7 +204,7 @@ const SideBar = ({
                         onChange={handleMaxSpeedChange}
                     />
                 </div>
-                {/* -- HAZARDOUS FILTER -- */}
+
                 <div className="side-bar__hazardous-filter">
                     <label className="side-bar__checkbox">
                         <input

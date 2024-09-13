@@ -57,9 +57,13 @@ const AsteroidProfile = () => {
 
     return (
         <>
-            <ProfileBar />
+            
 
             <div className="profile">
+
+            <ProfileBar />
+
+            <div className="profile__content">
                 <img
                     className="profile__image"
                     src={asteroidImage}
@@ -87,6 +91,7 @@ const AsteroidProfile = () => {
                         text="More Info"
                         onClick={handleMoreInfoClick}
                     />
+                </div>
                 </div>
             </div>
         </>

@@ -1,14 +1,16 @@
 @use "../../styles/variables" as *;
 
 .button {
+    font-family: "Space Mono", monospace;
     background-color: $color-yellow;
     color: $color-dark;
     border: 2px solid $color-dark;
     border-radius: 8px;
-    padding: 0.5rem 1rem;
+    padding: 0.6em 1.2em;
     font-size: 1rem;
     font-weight: 600;
     margin: 0 2rem;
+    cursor: pointer;
 
     &:hover {
         transform: scale(0.9);

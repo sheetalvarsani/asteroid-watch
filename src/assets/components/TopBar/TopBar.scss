@@ -4,17 +4,17 @@
 .top-bar {
     width: 100%;
     background-color: $color-dblue;
-    height: 90vh;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    margin: 2% auto;
+    margin: 50% auto;
 
     @include laptop-desktop {  
         height: 50vh;
+        margin-top: 10%;
     }
 
     &--searched {
@@ -51,10 +51,11 @@
         display: flex;
         flex-wrap: wrap;
         padding: 0 40px;
-        font-size: 0.5rem;
+        font-size: 1.2rem;
+        line-height: 1.1;
 
         @include laptop-desktop {
-            font-size: 1rem;
+            font-size: 1.5rem;            
         }
     }
 
@@ -78,6 +79,7 @@
 
         @include laptop-desktop {
             flex-direction: row;
+            margin: 0;
         }
     }
 

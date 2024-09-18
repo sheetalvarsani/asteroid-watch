@@ -2,30 +2,7 @@
 @import "../../styles/media";
 
 .side-bar {
-    // position: absolute;
-    // z-index: 2;
-    // background-color: $color-yellow;
-    // margin-top: 5%;
-    // border-radius: 15px;
-    // width: 90%;
-    // display: flex;
-    // justify-content: center;
-    // height: 100vh;
-    // padding: 0 3rem;
-    // box-sizing: border-box;
 
-    // @include laptop-desktop {
-    //     position:relative;
-    //     background-color: $color-yellow;
-    //     margin-top: 5%;
-    //     border-radius: 15px;
-    //     width: 100%;
-    //     display: flex;
-    //     justify-content: center;
-    //     height: 75vh;
-    //     padding: 0 3rem;
-    //     box-sizing: border-box;
-    // }
 
     &__filters {
         display: flex;
@@ -34,7 +11,7 @@
 
     &__heading {
         font-size: 1.2rem;
-        margin: 2.5rem 0 1.2rem 0;
+        margin: 4rem 0 2rem 0;
     }
 
     &__size-filter {
@@ -50,13 +27,13 @@
     &__subheading-size {
         font-size: 1rem;
         color: $color-dark;
-        margin: 1rem 0 1.7rem 0;
+        margin: 2rem 0 1.8rem 0;
     }
 
     &__subheading-speed {
         font-size: 1rem;
         color: $color-dark;
-        margin: 3rem 0 1.7rem 0;
+        margin: 4rem 0 1.8rem 0;
     }
 
     &__label {
@@ -94,7 +71,7 @@
     &__hazardous-filter {
         display: flex;
         flex-direction: column;
-        margin-top: 3rem;
+        margin-top: 4rem;
     }
 
     &__checkbox {
@@ -162,6 +139,7 @@
             border-radius: 10px;
             width: 90%;
             text-align: center;
+            cursor:pointer;
         }
     }
 }

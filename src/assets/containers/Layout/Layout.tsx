@@ -8,7 +8,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import fetchAsteroids from "../../../api";
 import loadingAsteroid from "../../../assets/images/loading-asteroid.png";
 
-const itemsPerPage = 6;
+const itemsPerPage = 9;
 
 const Layout = () => {
     const location = useLocation();
@@ -42,9 +42,6 @@ const Layout = () => {
         max: 100,
     });
 
-    const [sidebarVisible, setSidebarVisible] = useState(false);
-
-    // Handlers for filters and sorting
     const handleSizeChange = (minSize: number, maxSize: number) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
@@ -87,9 +84,8 @@ const Layout = () => {
         }
     }, [location.state]);
 
-    // Fetch asteroids data
     useEffect(() => {
-        if (!dateRange) return; // Safeguard if dateRange is null
+        if (!dateRange) return;
         const { startDate, endDate } = dateRange;
 
         setLoading(true);
@@ -98,7 +94,6 @@ const Layout = () => {
 
         fetchAsteroids(startDate, endDate)
             .then((fetchedAsteroids) => {
-                // Handle size and speed ranges
                 const sizes = fetchedAsteroids.map(
                     (asteroid: any) =>
                         asteroid.estimated_diameter.kilometers
@@ -119,7 +114,6 @@ const Layout = () => {
                 const maxSpeed = Math.max(...speeds);
                 handleSpeedRangeChange(minSpeed, maxSpeed);
 
-                // Apply filters
                 const filtered = fetchedAsteroids.filter((asteroid: any) => {
                     const sizeMax =
                         asteroid.estimated_diameter?.kilometers
@@ -148,7 +142,6 @@ const Layout = () => {
                     );
                 });
 
-                // Apply sorting
                 const sorted = filtered.sort((a, b) => {
                     let compareValue = 0;
                     if (sortBy.field === "missDistance") {
@@ -210,6 +203,8 @@ const Layout = () => {
         startIndex + itemsPerPage
     );
 
+    const [sidebarVisible, setSidebarVisible] = useState(false);
+
     const toggleSidebar = () => {
         setSidebarVisible((prev) => !prev);
     };
@@ -222,7 +217,7 @@ const Layout = () => {
                 <div className="layout__content">
                     <div
                         className={`layout__side-bar ${
-                            sidebarVisible ? "visible" : ""
+                            sidebarVisible ? "visible" : "hidden"
                         }`}
                     >
                         <SideBar
@@ -236,15 +231,26 @@ const Layout = () => {
                             onSortChange={handleSortChange}
                         />
                     </div>
+
                     <div className="layout__display-area">
-                        <div
-                            className="layout__hamburger"
+                        <button
+                            className="layout__toggle-button"
                             onClick={toggleSidebar}
+                            aria-label="Toggle Sidebar"
                         >
-                            <span className="layout__hamburger-bar"></span>
-                            <span className="layout__hamburger-bar"></span>
-                            <span className="layout__hamburger-bar"></span>
-                        </div>
+                            {sidebarVisible ? (
+                                <span className="layout__toggle-cross">
+                                    <div className="layout__toggle-cross-bar"></div>
+                                    <div className="layout__toggle-cross-bar"></div>
+                                </span>
+                            ) : (
+                                <span className="layout__toggle-menu">
+                                    <div className="layout__toggle-menu-bar"></div>
+                                    <div className="layout__toggle-menu-bar"></div>
+                                    <div className="layout__toggle-menu-bar"></div>
+                                </span>
+                            )}
+                        </button>
 
                         <div className="layout__asteroids">
                             {loading ? (

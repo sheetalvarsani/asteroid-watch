@@ -12,12 +12,17 @@
         position: sticky;
         top: 0;
         z-index: 1;
-        padding: 1rem 0;
-        margin: 1rem auto;
+        padding-top: 1rem;
+        margin-top: 1rem;
         width: 100%;
         text-align: center;
         color: $color-dark;
         background-color: $color-orange;
+
+        @include laptop-desktop {
+            padding: 1rem 0;
+            margin: 2rem auto;
+        }
     }
 
     &__results {

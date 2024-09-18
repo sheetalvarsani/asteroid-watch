@@ -10,12 +10,198 @@
     align-items: center;
     padding-top: 20px;
 
-    @include laptop-desktop {
-        height: 100vh;
-    }
-
     &__content {
         display: flex;
         width: 100%;
+        position: relative;
+    }
+
+    &__side-bar {
+        position: absolute;
+        z-index: 5;
+        margin-top: 5%;
+        width: 100%;
+        background-color: $color-yellow;
+        border-radius: 15px;
+        padding: 2rem 3rem;
+        box-sizing: border-box;
+        transition: transform 0.3s ease;
+        transform: translateX(-100%);
+        min-height: 900px;
+
+        &.visible {
+            transform: translateX(0);
+        }
+
+        &.hidden {
+            transform: translateX(-120%);
+        }
+
+        @include tablet {
+            width: 50%;
+        }
+
+        @include laptop-desktop {
+            position: relative;
+            margin: 1% 1% 1% 0;
+            border-radius: 15px;
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            min-height: 90vh;
+            padding: 2rem 2rem;
+            box-sizing: border-box;
+            transform: translateX(0);
+
+            &.visible {
+                transform: translateX(0);
+            }
+
+            &.hidden {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    &__display-area {
+        justify-content: center;
+        align-items: center;
+        background-color: $color-orange;
+        margin: 5% auto;
+        border-radius: 15px;
+        width: 100%;
+        color: $color-dark;
+        position: relative;
+        min-height: 90vh;
+
+        @include laptop-desktop {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            width: 80%;
+            min-height: 90vh;
+            margin: 1% 0 1% auto;
+        }
+    }
+
+    &__toggle-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background-color: transparent;
+        margin: 1rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+        border: none;
+
+        &:hover {
+            transform: scale(0.9);
+            transition: 0.2s;
+        }
+
+        &:focus {
+            outline: none;
+        }
+        @include laptop-desktop {
+            display: none;
+        }
+    }
+
+    &__toggle-cross,
+    &__toggle-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        position: relative;
+    }
+
+    &__toggle-cross {
+        &-bar {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: $color-dark;
+            position: absolute;
+
+            &:nth-child(1) {
+                transform: rotate(45deg); // First diagonal bar
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
+            &:nth-child(2) {
+                transform: rotate(-45deg); // Second diagonal bar
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+    }
+
+    &__toggle-menu {
+        &-bar {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: $color-dark;
+            position: absolute;
+
+            &:nth-child(1) {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            &:nth-child(2) {
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            &:nth-child(3) {
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    &__loading,
+    &__error {
+        font-size: 1.4rem;
+        color: $color-dark;
+    }
+
+    &__asteroid-image {
+        width: 15%;
+        animation: spin 5s infinite linear;
+        display: block;
+        margin: 0 auto;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    &__asteroids {
+        flex-grow: 1;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 }

@@ -5,4 +5,18 @@
     margin: 0 auto;
     text-align: center;
     background-color: #120114;
+    min-height: 100vh;
 }
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    min-width: 320px;
+
+}
+
+
+
+
+

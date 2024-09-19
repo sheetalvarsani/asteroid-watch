@@ -10,6 +10,7 @@ type SideBarProps = {
     onSpeedChange: (minSpeed: number, maxSpeed: number) => void;
     onHazardousChange: (hazardousOnly: boolean) => void;
     onSortChange: (sortBy: string, sortOrder: string) => void;
+    visible: boolean;
 };
 
 const SideBar = ({
@@ -21,6 +22,7 @@ const SideBar = ({
     onSpeedChange,
     onHazardousChange,
     onSortChange,
+    visible,
 }: SideBarProps) => {
     const [minRangeSize, setMinRangeSize] = useState<number>(minSize);
     const [maxRangeSize, setMaxRangeSize] = useState<number>(maxSize);
@@ -94,7 +96,7 @@ const SideBar = ({
     const formatNumber = (num: number) => num.toFixed(2);
 
     return (
-        <div className="side-bar">
+        <div className={`side-bar ${visible ? "visible" : "hidden"}`}>
             <div className="side-bar__filters">
                 <h2 className="side-bar__heading">Filter By:</h2>
 
@@ -108,7 +110,6 @@ const SideBar = ({
                     >
                         Min Size: {formatNumber(minRangeSize)}
                     </label>
-
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -119,14 +120,12 @@ const SideBar = ({
                         onChange={handleMinSizeChange}
                     />
                     <br />
-
                     <label
                         className="side-bar__label"
                         htmlFor="max-size-slider"
                     >
                         Max Size: {formatNumber(maxRangeSize)}
                     </label>
-
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -148,7 +147,6 @@ const SideBar = ({
                     >
                         Min Speed: {formatNumber(minRangeSpeed)}
                     </label>
-
                     <input
                         className="side-bar__slider"
                         type="range"
@@ -165,7 +163,6 @@ const SideBar = ({
                     >
                         Max Speed: {formatNumber(maxRangeSpeed)}
                     </label>
-
                     <input
                         className="side-bar__slider"
                         type="range"

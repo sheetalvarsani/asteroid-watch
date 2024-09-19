@@ -229,6 +229,7 @@ const Layout = () => {
                             onSpeedChange={handleSpeedChange}
                             onHazardousChange={handleHazardousChange}
                             onSortChange={handleSortChange}
+                            visible={sidebarVisible}
                         />
                     </div>
 
